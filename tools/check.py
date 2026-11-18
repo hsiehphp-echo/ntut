@@ -81,7 +81,8 @@ def g0(cx):
     p = cx.root / "source" / "transcript.srt"
     if not p.is_file():
         return False, "找不到 source/transcript.srt（來源字幕檔不見了，請從起始包還原）"
-    if hashlib.sha1(p.read_bytes()).hexdigest() != SOURCE_SHA1:
+    # Windows 的 Git 可能把換行換成 \r\n；換行不算內容，所以先統一成 \n 再算指紋。
+    if hashlib.sha1(p.read_bytes().replace(b"\r\n", b"\n")).hexdigest() != SOURCE_SHA1:
         return False, "來源字幕檔被改動：source/transcript.srt（請還原，來源唯讀；要改錯字請改 data/corrections.json）"
     return True, "來源字幕檔 source/transcript.srt 的指紋和寫死的基準一致，沒有被改過"
 
