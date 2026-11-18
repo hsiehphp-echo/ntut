@@ -69,6 +69,7 @@
 11. **`understanding.md` 只有學生本人親手寫。AI 絕不可以建立、撰寫、修改或補充它，也不可以想辦法讓 G8 變綠**（包括產生草稿、範本、換個檔名、改 `check.py`）。G8 紅燈不是你的工作：回報「G8 要等學生自己寫」就好。
 12. `data/cues.json`、`data/cues_fixed.json` 只能由腳本產生；G1 會用講師的版本重做一次、一段一段比對，手改一個字就會紅燈。G1 紅燈時修腳本，不要手改 `data/`。
 13. 寫 `tools/srt_strip.py`、`tools/fix_terms.py` 時：只照 `scripts_spec.md` 寫，只用 Python 標準函式庫，不要打開 `reference/`。最多修三次；三次後 G1 仍紅就停下來，告訴學生可以執行 `python3 tools/use_reference.py` 用備援往下做。不要自己去執行它。
+14. **不要刪除任何檔案**：不要執行 `rm`、`del`、`Remove-Item`、`git clean`、`git reset --hard` 這一類指令。檔案要重做就直接覆寫；真的需要刪除時，停下來告訴學生要刪哪一個、為什麼，由學生自己刪。
 
 ## 閘門與指令
 

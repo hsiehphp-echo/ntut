@@ -89,6 +89,30 @@ python3 tools/use_reference.py
 
 Windows 請打 `py tools/use_reference.py`。它會把 `reference/` 裡講師的版本放進 `tools/`，你寫的那一支改名成 `*.mine.py` 留著對照。用了備援不是失敗：今天要學的是怎麼把訂單寫清楚、怎麼檢查，不是比誰的 AI 厲害。
 
+## AI 動手前要不要問你：四種啟動方式
+
+AI 要寫檔或跑指令之前，會先問你可不可以。每一家工具都可以在啟動時決定「要問到什麼程度」。上課時老師會說用哪一種。
+
+| 工具 | 直接打指令時 | 改檔不問，指令照問 | 工具自己判斷 | 完全不問 |
+|---|---|---|---|---|
+| Claude Code | 新版（2.1.283 起）會自己判斷。要每一步都問：`claude --permission-mode default` | `claude --permission-mode acceptEdits` | `claude --permission-mode auto` | `claude --dangerously-skip-permissions` |
+| Antigravity CLI（agy） | 新版（1.5.7 起）用個人帳號時會自己判斷，其他情況每一步都問 | `agy --mode accept-edits` | `agy --mode auto` | `agy --dangerously-skip-permissions` |
+| Codex CLI | 官方文件沒有寫明 | 沒有對等的啟動方式 | `codex --approve-for-me` | `codex --yolo` |
+| GitHub Copilot | 每一步都問 | `copilot --allow-tool='write'` | `copilot --assisted-approval` | `copilot --yolo` |
+
+- **改檔不問，指令照問**：建立與修改檔案直接做；要跑指令時還是先問你。
+- **工具自己判斷**：工具裡另外有一層，判斷這個動作安不安全。它覺得安全就直接做，覺得有風險才問你。問得最少，但什麼時候問不固定。
+- **完全不問**：只適合用完就丟的測試環境，上課不用。
+
+依各家官方文件整理（2026-11-18 查核），之後各家可能再改：[Claude Code](https://code.claude.com/docs/en/permission-modes)、[Antigravity CLI](https://antigravity.google/docs/cli/modes)、[Codex CLI](https://developers.openai.com/codex/cli/reference)、[GitHub Copilot](https://docs.github.com/en/copilot/how-tos/copilot-cli/allowing-tools)。
+
+**會不會刪掉我的檔案？**
+
+- 不問的範圍越大，越有可能。在專案資料夾裡面，「改檔不問」和「工具自己判斷」都可能直接覆蓋或刪除檔案，不會先問你。官方文件自己也寫：自己判斷的模式只是減少詢問，不保證安全。
+- 專案資料夾外面比較安全。這幾家預設都把 AI 的活動範圍限制在你打開的那個資料夾。所以請一定在 `ntut` 資料夾裡啟動 AI，不要在桌面或使用者資料夾啟動。
+- 從 GitHub clone 下來的檔案救得回來（`git checkout .` 或重新 clone）。你自己做出來的檔案救不回來，尤其是你親手寫的 `understanding.md`。寫完請另外複製一份到別的地方。
+- 這個專案的班規（`CLAUDE.md`）有寫「不要刪除任何檔案」。這是對 AI 的要求，不是技術上的保證。
+
 ## 九道閘門
 
 `python3 tools/check.py`（Windows：`py tools/check.py`）每一道印一行，最後一行是 `RESULT: GREEN` 或 `RESULT: RED`，括號裡是過了幾道。紅燈不是壞掉，是它幫你抓到問題。
