@@ -41,7 +41,7 @@ def build(root: Path):
 
 def main() -> int:
     try:
-        sys.stdout.reconfigure(errors="replace")
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
     src = ROOT / "source" / "transcript.srt"

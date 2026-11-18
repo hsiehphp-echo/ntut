@@ -12,13 +12,15 @@ import shutil
 import sys
 from pathlib import Path
 
+PY = "py" if sys.platform == "win32" else "python3"  # 提示訊息裡的指令寫法
+
 ROOT = Path(__file__).resolve().parent.parent
 NAMES = ["srt_strip", "fix_terms"]
 
 
 def main() -> int:
     try:
-        sys.stdout.reconfigure(errors="replace")
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
     want = [a for a in sys.argv[1:] if not a.startswith("-")] or NAMES
@@ -36,7 +38,7 @@ def main() -> int:
             shutil.copyfile(dst, keep)
             print(f"[PASS] 你原本的 tools/{n}.py 另存成 tools/{n}.mine.py（留著對照，不會被執行）")
         shutil.copyfile(src, dst)
-        print(f"[PASS] 已把講師的版本放到 tools/{n}.py，現在可以跑 python3 tools/{n}.py")
+        print(f"[PASS] 已把講師的版本放到 tools/{n}.py，現在可以跑 {PY} tools/{n}.py")
     print("記得在 loop_log.md 記一行：哪一支用了備援、你的版本卡在哪裡。")
     return 0
 

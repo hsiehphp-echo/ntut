@@ -61,6 +61,6 @@
 
 ## 驗收
 
-分兩段：先和 AI 一起讓 `python3 tools/check.py --before-understanding`（G0 到 G7）全綠；再由學生自己把筆記讀一遍，親手寫 `understanding.md`；寫完先跑 `python3 tools/render.py`（網頁會多出「我的理解」，G7 要求網頁與檔案同步），最後跑完整的 `python3 tools/check.py`，G0 到 G8 全綠。機械檢查全綠不等於理解了，G8 只確認理解檔存在，內容要靠學生自己。
+分兩段：先和 AI 一起讓 `python3 tools/check.py --before-understanding`（G0 到 G7）全綠；再由學生自己把筆記讀一遍，親手寫 `understanding.md`；寫完先跑 `python3 tools/render.py`（網頁會多出「我的理解」，G7 要求網頁與檔案同步），最後跑完整的 `python3 tools/check.py`，G0 到 G8 全綠。指令裡的 `python3`，Windows 請改用 `py`（沒有 `py` 就用 `python`）。機械檢查全綠不等於理解了，G8 只確認理解檔存在，內容要靠學生自己。
 
 `understanding.md` 的格式：以「我的理解：」開頭寫至少 150 字，再另起一行以「我還不懂：」開頭寫一個問題。

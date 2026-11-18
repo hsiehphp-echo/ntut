@@ -1,4 +1,4 @@
-/* deck.css - NTUT workshop lecture slides. Contract: site/slides/README.md.
+/* deck.css - NTUT workshop lecture slides (slides/session1.html; open it by double-click, file:// works).
    Logical stage 1280x720, scaled by deck.js through --s. Light by default, dark via prefers-color-scheme. */
 :root{
   --bg:#faf6ee;--bg2:#f3eddf;--fg:#2b2925;--muted:#5f594e;--line:#ddd4c2;
@@ -7,8 +7,8 @@
   --ok-soft:#e4f0e5;--warn-soft:#f7ecd2;--bad-soft:#f7e2dc;
   --code-bg:#f1ebdd;--code-fg:#2b2925;--card:#fffdf8;
   --letter:#e9e2d2;--scrim:rgba(250,246,238,.92);
-  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,-apple-system,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans TC",monospace;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei","微軟正黑體","Segoe UI",system-ui,-apple-system,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";
+  --mono:"JetBrains Mono",Consolas,ui-monospace,SFMono-Regular,Menlo,"Noto Sans TC","Microsoft JhengHei","微軟正黑體",monospace,"Segoe UI Emoji","Segoe UI Symbol";
   --s:.5;
   color-scheme:light;
 }

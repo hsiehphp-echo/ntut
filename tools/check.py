@@ -28,6 +28,8 @@ import re
 import sys
 from pathlib import Path
 
+PY = "py" if sys.platform == "win32" else "python3"  # 提示訊息裡的指令寫法
+
 ROOT = Path(__file__).resolve().parent.parent
 TOOLS = Path(__file__).resolve().parent
 ROOT_REF = ROOT / "reference"
@@ -58,7 +60,13 @@ class Ctx:
 
     def text(self, rel):
         p = self.root / rel
-        return gsn.read_text(p) if p.is_file() else None
+        if not p.is_file():
+            return None
+        try:
+            return gsn.read_text(p)
+        except UnicodeDecodeError:
+            # Windows 的編輯器可能存成 ANSI（cp950）；這不是內容錯，但檔案一律要是 UTF-8。
+            raise ValueError(f"{rel} 不是 UTF-8 編碼（請在編輯器裡改用 UTF-8 另存；Windows 記事本的「編碼」選 UTF-8）") from None
 
     def load(self, rel):
         if rel in self._c:
@@ -114,7 +122,9 @@ def first_diff(have, want, what):
 def g1(cx):
     have = cx.load("data/cues.json")
     if have is None:
-        return False, "還沒做 S1：還沒有 data/cues.json（請先執行 python3 tools/srt_strip.py 把字幕的時間軸拿掉）"
+        if "data/cues.json" in cx.bad:
+            return False, f"data/cues.json 不是合法 JSON：{cx.bad['data/cues.json']}（格式見 scripts_spec.md；請修正 tools/srt_strip.py 再重跑，不要手改 data/）"
+        return False, f"還沒做 S1：還沒有 data/cues.json（請先執行 {PY} tools/srt_strip.py 把字幕的時間軸拿掉）"
     want = ref("srt_strip").build(cx.root)["cues"]
     d = first_diff(have.get("cues") if isinstance(have, dict) else None, want, "data/cues.json")
     if d:
@@ -123,14 +133,16 @@ def g1(cx):
         return False, "找不到 data/corrections.json（校正用語清單）"
     fixed = cx.load("data/cues_fixed.json")
     if fixed is None:
-        return False, "時間軸拿掉了，還沒套校正用語：還沒有 data/cues_fixed.json（請執行 python3 tools/fix_terms.py）"
+        if "data/cues_fixed.json" in cx.bad:
+            return False, f"data/cues_fixed.json 不是合法 JSON：{cx.bad['data/cues_fixed.json']}（格式見 scripts_spec.md；請修正 tools/fix_terms.py 再重跑，不要手改 data/）"
+        return False, f"時間軸拿掉了，還沒套校正用語：還沒有 data/cues_fixed.json（請執行 {PY} tools/fix_terms.py）"
     try:
         wantf, hits = ref("fix_terms").build(cx.root)
     except ValueError as e:
         return False, f"data/corrections.json 讀不懂：{e}"
     d = first_diff(fixed.get("cues") if isinstance(fixed, dict) else None, wantf["cues"], "data/cues_fixed.json")
     if d:
-        return False, d + "（改了校正用語或腳本之後要重跑 python3 tools/fix_terms.py，不要手改 data/）"
+        return False, d + f"（改了校正用語或腳本之後要重跑 {PY} tools/fix_terms.py，不要手改 data/）"
     n = sum(gsn.count(c["text"]) for c in wantf["cues"])
     return True, f"{len(want)} 段字幕的文字和標準答案一段一段都一樣，套了 {len(hits)} 條校正用語，共 {n} 個字"
 
@@ -268,9 +280,9 @@ def g7(cx):
     import render
     p = cx.root / "site" / "index.html"
     if not p.is_file():
-        return False, "還沒有 site/index.html（請跑 python3 tools/render.py）"
+        return False, f"還沒有 site/index.html（請跑 {PY} tools/render.py）"
     if p.read_bytes().replace(b"\r\n", b"\n").decode("utf-8") != render.render(cx.root):
-        return False, "site/index.html 和現在的檔案不同步（請重跑 python3 tools/render.py，不要手改 site/）"
+        return False, f"site/index.html 和現在的檔案不同步（請重跑 {PY} tools/render.py，不要手改 site/）"
     return True, "site/index.html 是腳本用現在的檔案產生的"
 
 
@@ -294,6 +306,12 @@ def main() -> int:
     ap.add_argument("--before-understanding", action="store_true", dest="before_u",
                     help="只跑 G0–G7（不含 G8）；用在學生還沒親手寫 understanding.md 的階段")
     ap.add_argument("--root", default=str(ROOT))
+    # Windows 把輸出接到管線（Git Bash、AI 工具）時預設不是 UTF-8，會印成亂碼或當掉；先改成 UTF-8，印不出來的字用 ? 代替。
+    # 要放在 parse_args 之前，--help 的說明文字才印得出來。
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
     a = ap.parse_args()
     enc = getattr(sys.stdout, "encoding", None) or "utf-8"
     try:
@@ -301,10 +319,6 @@ def main() -> int:
         emoji = True
     except Exception:
         emoji = False
-    try:
-        sys.stdout.reconfigure(errors="replace")
-    except Exception:
-        pass
     if a.before_u and a.only:
         print("[FAIL] --before-understanding 和 --only 不能一起用")
         return 2
@@ -323,10 +337,11 @@ def main() -> int:
         try:
             r, msg = fn(cx)
         except Exception as e:  # 資料格式錯誤也要變成紅燈而不是當掉
-            r, msg = False, f"資料格式有問題（{type(e).__name__}: {e}）"
+            r, msg = False, str(e) if type(e) is ValueError else f"資料格式有問題（{type(e).__name__}: {e}）"
         if not r:
             for f in cx.bad:
-                msg += f"；{f} 不是合法 JSON"
+                if f not in msg:
+                    msg += f"；{f} 不是合法 JSON"
         tot += 1
         ok += bool(r)
         mark = ("✅" if r else "❌") if emoji else ""
@@ -335,7 +350,7 @@ def main() -> int:
     print(f"RESULT: {'GREEN' if green else 'RED'} ({ok}/{tot})")
     if a.before_u and green:
         print("G0–G7 都過了，還沒跑 G8，還不算完成：換你自己讀筆記、親手寫 understanding.md，"
-              "寫完先跑 python3 tools/render.py，再跑 python3 tools/check.py")
+              f"寫完先跑 {PY} tools/render.py，再跑 {PY} tools/check.py")
     return 0 if green else 1
 
 

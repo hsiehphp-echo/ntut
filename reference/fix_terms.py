@@ -10,6 +10,8 @@ import json
 import sys
 from pathlib import Path
 
+PY = "py" if sys.platform == "win32" else "python3"  # 提示訊息裡的指令寫法
+
 ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -53,11 +55,11 @@ def build(root: Path):
 
 def main() -> int:
     try:
-        sys.stdout.reconfigure(errors="replace")
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
     if not (ROOT / "data" / "cues.json").is_file():
-        print("[FAIL] 還沒有 data/cues.json（請先跑 python3 tools/srt_strip.py）")
+        print(f"[FAIL] 還沒有 data/cues.json（請先跑 {PY} tools/srt_strip.py）")
         return 1
     if not (ROOT / "data" / "corrections.json").is_file():
         print("[FAIL] 找不到 data/corrections.json（校正用語清單）")

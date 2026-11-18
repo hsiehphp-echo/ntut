@@ -17,11 +17,11 @@ START = re.compile(r"^\s*(?:#{2,4}\s*(?:步驟\s*)?(\d+)\b|(?:步驟\s*)?(\d+)\s
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--root", default=str(Path(__file__).resolve().parent.parent))
-    a = ap.parse_args()
     try:
-        sys.stdout.reconfigure(errors="replace")
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
+    a = ap.parse_args()
     enc = getattr(sys.stdout, "encoding", None) or "utf-8"
     try:
         "✅❌".encode(enc)
@@ -33,8 +33,14 @@ def main() -> int:
         print(f"[FAIL] {'❌ ' if em else ''}找不到 plan.md")
         print("RESULT: RED (0/1)")
         return 1
+    try:
+        text = p.read_text(encoding="utf-8-sig")  # 編輯器可能加 BOM、用 \r\n，都要能讀
+    except UnicodeDecodeError:
+        print(f"[FAIL] {'❌ ' if em else ''}plan.md 不是 UTF-8 編碼（請在編輯器裡改用 UTF-8 另存）")
+        print("RESULT: RED (0/1)")
+        return 1
     steps, cur = [], None
-    for ln in p.read_text(encoding="utf-8").splitlines():
+    for ln in text.splitlines():
         m = START.match(ln)
         if m:
             cur = {"n": m.group(1) or m.group(2), "t": []}

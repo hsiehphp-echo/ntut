@@ -10,20 +10,21 @@
 
 ## 怎麼開始
 
-1. 把專案複製到你的電腦（clone）。在終端機進到你想放的資料夾，例如桌面的 `ntut-workshop`：
+1. 把專案複製到你的電腦（clone）。在終端機進到你想放的資料夾，例如桌面的 `ntut-workshop`，然後執行下面兩行（第一行會多出一個 `ntut` 資料夾，第二行進到裡面）：
 
    ```
    git clone https://github.com/shuotao/ntut.git
+   cd ntut
    ```
 
-2. 用 VS Code 打開 `ntut` 資料夾（檔案 → 開啟資料夾），再開一個終端機（終端機 → 新增終端機）。
+2. 用 VS Code 打開 `ntut` 資料夾（檔案 → 開啟資料夾），再開一個終端機（終端機 → 新增終端機）。Windows 的終端機預設是 PowerShell：指令一行一行貼、一行一行跑，不要用 `&&` 把兩個指令串在一起。
 3. 看一次紅燈。現在什麼都還沒做，所以九道檢查只有一道是綠的，這是正確的起點：
 
    ```
-   python3 tools/check.py
+   py tools/check.py
    ```
 
-   最後一行應該是 `RESULT: RED (1/9)`。Windows 請把 `python3` 換成 `py`。
+   最後一行應該是 `RESULT: RED (1/9)`。如果 Windows 說找不到 `py`，就改成 `python tools/check.py`；不要打 `python3`，在 Windows 上它常會跳出 Microsoft Store。macOS 用 `python3 tools/check.py`。下面所有指令裡的 `python3`，Windows 都照這樣換成 `py`（或 `python`）。
 
 4. 在這個資料夾啟動你的 AI 工具（`claude`、`codex`、`agy` 或 `copilot`），貼上第一句話：
 
@@ -86,11 +87,11 @@ S1 的兩支腳本一開始不存在。你要用提示詞請 AI 照 [`scripts_sp
 python3 tools/use_reference.py
 ```
 
-它會把 `reference/` 裡講師的版本放進 `tools/`，你寫的那一支改名成 `*.mine.py` 留著對照。用了備援不是失敗：今天要學的是怎麼把訂單寫清楚、怎麼檢查，不是比誰的 AI 厲害。
+Windows 請打 `py tools/use_reference.py`。它會把 `reference/` 裡講師的版本放進 `tools/`，你寫的那一支改名成 `*.mine.py` 留著對照。用了備援不是失敗：今天要學的是怎麼把訂單寫清楚、怎麼檢查，不是比誰的 AI 厲害。
 
 ## 九道閘門
 
-`python3 tools/check.py` 每一道印一行，最後一行是 `RESULT: GREEN` 或 `RESULT: RED`。紅燈不是壞掉，是它幫你抓到問題。
+`python3 tools/check.py`（Windows：`py tools/check.py`）每一道印一行，最後一行是 `RESULT: GREEN` 或 `RESULT: RED`，括號裡是過了幾道。紅燈不是壞掉，是它幫你抓到問題。
 
 | 閘門 | 檢查什麼 |
 |---|---|

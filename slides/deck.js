@@ -1,4 +1,4 @@
-/* deck.js - NTUT workshop lecture slides engine. Vanilla, no dependencies. Contract: site/slides/README.md.
+/* deck.js - NTUT workshop lecture slides engine. Vanilla, no dependencies, no fetch/modules: works from file://.
    Keys: Right/Space/PageDown next, Left/PageUp prev, Home/End, F fullscreen, N teacher notes, O overview, Esc close.
    Also: click right/left half, touch swipe, #n deep link (browser Back works), data-anim animations. */
 (function () {

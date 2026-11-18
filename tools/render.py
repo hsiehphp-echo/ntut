@@ -17,6 +17,8 @@ import re
 import sys
 from pathlib import Path
 
+PY = "py" if sys.platform == "win32" else "python3"  # 提示訊息裡的指令寫法
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import gsn  # noqa: E402
 
@@ -62,7 +64,13 @@ def inline(s):
 
 def load(root, rel):
     p = root / rel
-    return gsn.read_text(p) if p.is_file() else None
+    if not p.is_file():
+        return None
+    try:
+        return gsn.read_text(p)
+    except UnicodeDecodeError:
+        # Windows 的編輯器可能存成 ANSI（cp950）；檔案一律要是 UTF-8。
+        raise ValueError(f"{rel} 不是 UTF-8 編碼（請在編輯器裡改用 UTF-8 另存；Windows 記事本的「編碼」選 UTF-8）") from None
 
 
 def block_html(lines):
@@ -151,7 +159,7 @@ def render(root: Path) -> str:
     elif raw:
         title, body = "字幕文字（剛拿掉時間軸，還沒校正）", cues_html(raw)
     else:
-        title, body = "還沒有內容", '<p class="empty">請先跑 python3 tools/srt_strip.py</p>'
+        title, body = "還沒有內容", f'<p class="empty">請先跑 {PY} tools/srt_strip.py</p>'
     if mine:
         paras = "".join(f"<p>{inline(p)}</p>" for p in mine.split("\n") if p.strip() and not p.startswith("#"))
         mine_html = f'<div class="mine">{paras}</div>'
@@ -188,14 +196,19 @@ def render(root: Path) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--root", default=str(Path(__file__).resolve().parent.parent))
-    a = ap.parse_args()
     try:
-        sys.stdout.reconfigure(errors="replace")
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
+    a = ap.parse_args()
     root = Path(a.root).resolve()
+    try:
+        page = render(root)
+    except ValueError as e:
+        print(f"[FAIL] {e}")
+        return 1
     (root / "site").mkdir(exist_ok=True)
-    (root / "site" / "index.html").write_text(render(root), encoding="utf-8", newline="\n")
+    (root / "site" / "index.html").write_text(page, encoding="utf-8", newline="\n")
     print("[PASS] 已產生：site/index.html")
     return 0
 
