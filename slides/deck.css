@@ -1,0 +1,186 @@
+/* deck.css - NTUT workshop lecture slides. Contract: site/slides/README.md.
+   Logical stage 1280x720, scaled by deck.js through --s. Light by default, dark via prefers-color-scheme. */
+:root{
+  --bg:#faf6ee;--bg2:#f3eddf;--fg:#2b2925;--muted:#5f594e;--line:#ddd4c2;
+  --accent:#2a7f7f;--accent-ink:#1d5f5f;--accent-soft:#e1efec;
+  --ok:#2f7a4d;--warn:#85580a;--bad:#a8432f;
+  --ok-soft:#e4f0e5;--warn-soft:#f7ecd2;--bad-soft:#f7e2dc;
+  --code-bg:#f1ebdd;--code-fg:#2b2925;--card:#fffdf8;
+  --letter:#e9e2d2;--scrim:rgba(250,246,238,.92);
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans TC",monospace;
+  --s:.5;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#171918;--bg2:#1e2120;--fg:#e8e4da;--muted:#a09a8d;--line:#35393a;
+    --accent:#5fb3b0;--accent-ink:#8fd0cd;--accent-soft:#1d3433;
+    --ok:#6cc08a;--warn:#e0b04f;--bad:#e8806a;
+    --ok-soft:#1b2e22;--warn-soft:#332913;--bad-soft:#372119;
+    --code-bg:#101312;--code-fg:#e8e4da;--card:#1c1f1e;
+    --letter:#0b0d0c;--scrim:rgba(23,25,24,.9);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171918;--bg2:#1e2120;--fg:#e8e4da;--muted:#a09a8d;--line:#35393a;
+  --accent:#5fb3b0;--accent-ink:#8fd0cd;--accent-soft:#1d3433;
+  --ok:#6cc08a;--warn:#e0b04f;--bad:#e8806a;
+  --ok-soft:#1b2e22;--warn-soft:#332913;--bad-soft:#372119;
+  --code-bg:#101312;--code-fg:#e8e4da;--card:#1c1f1e;
+  --letter:#0b0d0c;--scrim:rgba(23,25,24,.9);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--letter);color:var(--fg);font:400 28px/1.5 var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-ink)}
+img,svg{max-width:100%}
+
+/* ---- stage: every slide is a 1280x720 box centred in the viewport and scaled by --s ---- */
+.deck{position:fixed;inset:0;margin:0;padding:0;background:var(--letter);overflow:hidden}
+.slide{
+  position:absolute;left:50%;top:50%;width:1280px;height:720px;
+  transform:translate(-50%,-50%) scale(var(--s));transform-origin:center center;
+  display:none;flex-direction:column;justify-content:center;gap:28px;
+  padding:64px 96px 92px;background:var(--bg);color:var(--fg);overflow:hidden;
+}
+.slide.active{display:flex}
+.slide::before{content:"";position:absolute;left:0;top:0;bottom:0;width:14px;background:var(--accent)}
+
+/* ---- elements ---- */
+.slide .eyebrow{margin:0;font-size:24px;letter-spacing:.14em;color:var(--accent-ink);font-weight:500}
+.slide .key{margin:0;font-size:56px;line-height:1.3;font-weight:700;letter-spacing:.01em;color:var(--fg)}
+.slide .sub{margin:0;font-size:30px;color:var(--muted)}
+.slide .points{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px}
+.slide .points li{position:relative;padding-left:44px;font-size:32px;line-height:1.4}
+.slide .points li::before{content:"";position:absolute;left:4px;top:.5em;width:18px;height:18px;border-radius:50%;background:var(--accent)}
+.slide h3{margin:0;font-size:34px;line-height:1.3;color:var(--accent-ink)}
+.slide .chip{
+  display:inline-block;align-self:flex-start;padding:8px 22px;border-radius:14px;
+  background:var(--code-bg);color:var(--code-fg);border:2px solid var(--line);
+  font:500 30px/1.4 var(--mono);
+}
+.slide .vis{margin:0;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0}
+.slide .vis img,.slide .vis svg{display:block;max-width:100%;max-height:100%;width:auto;height:auto;border-radius:18px}
+.slide .vis svg{border-radius:0}
+.slide .vis figcaption{display:none}
+.slide .handoff{
+  display:inline-block;align-self:flex-start;padding:16px 40px;border-radius:999px;
+  background:var(--accent);color:#fff;text-decoration:none;font-size:38px;font-weight:700;line-height:1.3;
+  border:3px solid var(--accent);
+}
+.slide .handoff.first::after{content:"做完按瀏覽器「上一頁」，回到這張簡報"}
+.slide .handoff:hover,.slide .handoff:focus-visible{background:var(--accent-ink);border-color:var(--accent-ink)}
+.slide .handoff::after{content:"← 上一頁回來";display:block;margin-top:6px;font-size:20px;font-weight:400;opacity:.85}
+
+/* ---- layouts ---- */
+.slide.title{justify-content:center;gap:24px}
+.slide.title .key{font-size:76px;line-height:1.2}
+.slide.title .sub{font-size:34px}
+.slide.title .vis{position:absolute;right:56px;bottom:84px;width:440px;height:340px}
+.slide.title .key,.slide.title .sub,.slide.title .eyebrow{max-width:700px}
+
+.slide.divider{justify-content:center;background:var(--accent-soft)}
+.slide.divider .stage{margin:0;font-size:220px;line-height:1;font-weight:700;color:var(--accent);letter-spacing:.02em}
+.slide.divider .key{font-size:64px}
+.slide.divider .mins{margin:0;font-size:32px;color:var(--muted)}
+
+.slide.split{flex-direction:row;align-items:center;gap:56px}
+.slide.split .text{flex:1 1 52%;display:flex;flex-direction:column;gap:26px;min-width:0}
+.slide.split .vis{flex:1 1 48%;height:100%}
+
+.slide.full{padding:0;justify-content:flex-end}
+.slide.full>.vis{position:absolute;inset:0;z-index:0;border-radius:0}
+.slide.full>.vis img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;border-radius:0}
+.slide.full .key,.slide.full .sub,.slide.full .eyebrow,.slide.full .points,.slide.full .handoff,.slide.full .chip{position:relative;z-index:1}
+.slide.full .key{margin:0;padding:34px 96px 84px;background:linear-gradient(to top,var(--scrim) 62%,transparent)}
+.slide.full::before{z-index:2}
+
+.slide.compare .cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch;flex:1;min-height:0}
+.slide.compare .col{display:flex;flex-direction:column;gap:20px;padding:28px 32px;border-radius:22px;background:var(--card);border:2px solid var(--line);min-width:0}
+.slide.compare .col.bad{background:var(--bad-soft);border-color:var(--bad)}
+.slide.compare .col.good{background:var(--ok-soft);border-color:var(--ok)}
+.slide.compare .col.bad h3{color:var(--bad)}
+.slide.compare .col.good h3{color:var(--ok)}
+.slide.compare .col .vis{flex:1}
+.slide.compare .points li{font-size:30px}
+
+.slide.recap{justify-content:center}
+.slide.recap .points{counter-reset:r;gap:22px}
+.slide.recap .points li{counter-increment:r;padding-left:76px;font-size:36px}
+.slide.recap .points li::before{counter-increment:none;content:counter(r);left:0;top:.05em;width:50px;height:50px;font-size:30px;line-height:50px;text-align:center;color:#fff;font-weight:700}
+
+/* ---- footer injected by deck.js ---- */
+.slide-foot{
+  position:absolute;left:96px;right:48px;bottom:26px;display:flex;gap:24px;align-items:baseline;
+  font-size:20px;color:var(--muted);z-index:3;
+}
+.slide-foot .lesson{font-weight:500}
+.slide-foot a{color:var(--muted)}
+.slide-foot .count{margin-left:auto;font-variant-numeric:tabular-nums}
+.slide.full .slide-foot,.slide.full .slide-foot a{color:var(--fg)}
+.slide.full .slide-foot{left:96px;bottom:22px}
+
+/* ---- teacher notes ---- */
+.slide .notes{display:none}
+body.show-notes .slide.active .notes{
+  display:block;position:absolute;left:0;right:0;bottom:0;z-index:20;max-height:52%;overflow:auto;
+  padding:22px 96px 26px;background:var(--fg);color:var(--bg);font-size:24px;line-height:1.55;
+}
+
+/* ---- chrome ---- */
+.deck-progress{position:fixed;left:0;top:0;height:5px;width:0;background:var(--accent);z-index:100;transition:width .25s}
+.deck-hint{position:fixed;right:10px;bottom:8px;z-index:100;font:500 12px/1 var(--sans);color:var(--muted);opacity:.0;transition:opacity .3s;pointer-events:none}
+body.show-hint .deck-hint{opacity:.8}
+
+/* ---- overview grid ---- */
+.deck-overview{display:none;position:fixed;inset:0;z-index:50;overflow:auto;background:var(--letter);padding:28px;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;align-content:start}
+body.show-overview .deck-overview{display:grid}
+body.show-overview .deck>.slide{visibility:hidden}
+.deck-thumb{position:relative;aspect-ratio:16/9;border:3px solid var(--line);border-radius:10px;overflow:hidden;cursor:pointer;background:var(--bg);padding:0;font:inherit;color:inherit;text-align:left}
+.deck-thumb.current{border-color:var(--accent)}
+.deck-thumb:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.deck-thumb .inner{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:0 0;pointer-events:none}
+.deck-thumb .inner .slide{display:flex;position:absolute;left:0;top:0;transform:none;visibility:visible}
+.deck-thumb .num{position:absolute;right:6px;bottom:4px;z-index:5;font:700 13px/1 var(--sans);background:var(--fg);color:var(--bg);padding:3px 7px;border-radius:6px}
+.deck-thumb [data-anim]{animation:none!important}
+.deck-thumb .notes{display:none!important}
+
+/* ---- animation: data-anim on any element. Class .play is added when the slide becomes active. ---- */
+[data-anim]{animation-duration:var(--dur,.7s);animation-timing-function:ease-out;animation-fill-mode:both}
+[data-anim="fade"].play{animation-name:da-fade}
+[data-anim="rise"].play{animation-name:da-rise}
+[data-anim="pop"].play{animation-name:da-pop;transform-box:fill-box;transform-origin:center}
+[data-anim="draw"]{stroke-dasharray:1;stroke-dashoffset:0}
+[data-anim="draw"].play{animation-name:da-draw;animation-duration:var(--dur,1.4s)}
+[data-anim="pulse"].play{animation-name:da-pulse;animation-duration:var(--dur,1.6s);animation-iteration-count:infinite;animation-timing-function:ease-in-out;transform-box:fill-box;transform-origin:center}
+@keyframes da-fade{from{opacity:0}to{opacity:1}}
+@keyframes da-rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes da-pop{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
+@keyframes da-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes da-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+@media (prefers-reduced-motion:reduce){
+  [data-anim],[data-anim].play{animation:none!important}
+  .deck-progress{transition:none}
+}
+
+/* ---- no JS: show every slide as a scrolling page ---- */
+html.no-js,html.no-js body{height:auto;overflow:auto}
+html.no-js .deck{position:static}
+html.no-js .slide{display:flex;position:relative;left:auto;top:auto;transform:none;margin:0 auto 24px;max-width:100%}
+
+/* ---- print: one slide per landscape page ---- */
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{height:auto;overflow:visible;background:#fff}
+  .deck{position:static;overflow:visible;background:none}
+  .slide,.slide.active{display:flex;position:relative;left:auto;top:auto;transform:none;margin:0;page-break-after:always;break-after:page;break-inside:avoid;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .slide.full>.vis{position:absolute}
+  .deck-progress,.deck-hint,.deck-overview{display:none!important}
+  body.show-notes .slide.active .notes,.slide .notes{display:none!important}
+  [data-anim]{animation:none!important}
+}

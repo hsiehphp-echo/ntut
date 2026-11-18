@@ -1,0 +1,125 @@
+/* deck-vv.css - black / white theme layered on deck.css (load it AFTER deck.css; deck.js is unchanged).
+   Visual lineage: "The Physics of Insight" (2026.01, tribute to Jack Butcher / Visualize Value):
+   pure black ground, white line, heavy sans (黑體) only, no serif / kai, one idea per page, no decoration. */
+:root:root:root{
+  --bg:#000;--bg2:#0a0a0a;--fg:#fff;--muted:#8f8f8f;--line:#3a3a3a;
+  --accent:#fff;--accent-ink:#fff;--accent-soft:#000;
+  --ok:#fff;--warn:#fff;--bad:#fff;--ok-soft:#000;--warn-soft:#000;--bad-soft:#000;
+  --code-bg:#000;--code-fg:#fff;--card:#000;--letter:#000;--scrim:rgba(0,0,0,.9);
+  --serif:var(--sans);
+  color-scheme:dark;
+}
+.slide::before{display:none}
+.slide{padding:60px 96px 96px;gap:26px}
+.slide .key{font-family:var(--serif);font-weight:900;font-size:54px;line-height:1.32;letter-spacing:.02em}
+.slide .sub{font-size:28px;font-weight:300;color:var(--muted)}
+.slide .eyebrow{font:400 20px/1 var(--mono);letter-spacing:.22em;color:var(--muted)}
+.slide .handoff{color:#000}
+.slide-foot{font-size:16px;letter-spacing:.06em;color:#5c5c5c}
+.slide-foot a{color:#5c5c5c;text-decoration:none}
+.deck-progress{height:2px}
+body.show-notes .slide.active .notes{background:#111;color:#cfcfcf;border-top:1px solid var(--line);font-size:22px}
+
+/* small parts */
+.slide .no{margin:0;font:400 20px/1 var(--mono);letter-spacing:.22em;color:var(--muted)}
+.slide .pair{margin:0;font:400 20px/1.3 var(--mono);letter-spacing:.12em;color:var(--muted)}
+.slide .desc{margin:0;font-size:30px;line-height:1.6;font-weight:300}
+.slide .desc strong{font-weight:700}
+.slide .how{margin:6px 0 0;padding:20px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:12px 24px;align-items:baseline}
+.slide .how dt{margin:0;font:400 16px/1.4 var(--mono);letter-spacing:.2em;color:var(--muted)}
+.slide .how dd{margin:0;font-size:22px;line-height:1.5;color:#cfcfcf}
+.slide .src{margin:0;font-size:18px;color:var(--muted)}
+
+/* title */
+.slide.title .key{font-size:74px;line-height:1.22}
+.slide.title .sub{font-size:32px}
+.slide.title .vis{right:72px;bottom:auto;top:150px;width:330px;height:330px}
+
+/* vv: picture left, statement right (the page shape of the 2026.01 deck) */
+.slide.vv{flex-direction:row;align-items:center;gap:76px}
+.slide.vv .vis{flex:0 0 500px;height:500px}
+.slide.vv .vis img{border-radius:0}
+.slide.vv .text{flex:1 1 auto;display:flex;flex-direction:column;gap:22px;min-width:0}
+.slide.vv .key{font-size:48px}
+.slide.vv h1.key{font-size:52px;line-height:1.3}
+
+/* say: one sentence on the whole page */
+.slide.say{align-items:center;text-align:center;gap:34px}
+.slide.say .key{font-size:64px;line-height:1.4;max-width:1000px}
+.slide.say .desc{color:#cfcfcf}
+
+/* wide: statement on top, one wide drawing below */
+.slide.wide{justify-content:center;gap:24px}
+.slide.wide .vis{flex:0 1 auto;min-height:0;width:100%;margin-top:14px}
+
+/* evidence: two source pictures on white cards */
+.slide.proof{justify-content:flex-start;gap:20px}
+.slide.proof .row{display:grid;grid-template-columns:330px 1fr;gap:44px;flex:1 1 auto;min-height:0}
+.slide.proof figure{margin:0;display:flex;flex-direction:column;gap:12px;min-height:0}
+.slide.proof figure img{display:block;width:100%;height:392px;object-fit:contain;object-position:left top;background:#fff}
+.slide.proof figcaption{font-size:22px;line-height:1.45;color:#cfcfcf}
+
+/* three columns: tool / AI / person */
+.slide .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.slide .trio>div{padding:26px 32px 28px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.slide .trio>div:first-child{border-left:0;padding-left:0}
+.slide .trio .g{font-size:44px;line-height:1;height:48px;display:flex;align-items:center}
+.slide .trio h3{font-family:var(--serif);font-weight:900;font-size:36px;color:#fff}
+.slide .trio p{margin:0;font-size:26px;line-height:1.55;font-weight:300;color:#cfcfcf}
+
+/* closing list */
+.slide .three{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:left;border-top:1px solid var(--line);padding-top:26px;max-width:1088px}
+.slide .three li{font-size:23px;line-height:1.6;font-weight:300;color:#cfcfcf}
+.slide .three b{display:block;font:400 16px/1 var(--mono);letter-spacing:.2em;color:var(--muted);margin-bottom:10px}
+
+/* drawings: white line on black, nothing else */
+.vis svg text{font-family:var(--sans);fill:#fff}
+.vis svg .lab{font-family:var(--sans);font-weight:900;font-size:56px;text-anchor:middle;letter-spacing:2px}
+.vis svg .cap{font-size:24px;text-anchor:middle;fill:#8f8f8f;font-weight:300}
+.vis svg .mono{font-family:var(--mono)}
+.vis svg .m{fill:#8f8f8f}
+.vis svg .se{font-family:var(--serif);font-weight:900}
+.vis svg .ln{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.vis svg .th{stroke-width:2}
+.vis svg .gr{stroke:#5c5c5c}
+.vis svg .ds{stroke-dasharray:9 11}
+.vis svg .w{fill:#fff}
+.vis svg .k{fill:#000}
+.vis svg .bx{fill:#000;stroke:#fff;stroke-width:3}
+.vis svg .bxg{fill:#000;stroke:#4a4a4a;stroke-width:2}
+
+/* steps table: who does it, what is handed over, what the next step confirms first */
+.slide .steps{border-collapse:collapse;width:100%;font-size:19px;line-height:1.4;table-layout:fixed}
+.slide .steps th,.slide .steps td{padding:4px 16px 4px 0;text-align:left;border-top:1px solid var(--line);font-weight:300;color:#cfcfcf;vertical-align:baseline}
+.slide .steps thead th{border-top:0;font:400 16px/1.4 var(--mono);letter-spacing:.2em;color:var(--muted);padding-bottom:10px}
+.slide .steps tbody th{font:400 18px/1 var(--mono);color:var(--muted);width:44px}
+.slide .steps td.s{font-weight:900;color:#fff;font-size:22px;white-space:nowrap}
+.slide .steps tbody tr:last-child td,.slide .steps tbody tr:last-child th{border-bottom:1px solid var(--line)}
+.slide.tbl{gap:12px;padding-top:36px}
+.slide.tbl .key{font-size:40px}
+.slide.tbl .sub{font-size:20px}
+.slide .steps th:nth-child(1){width:40px}.slide .steps th:nth-child(2){width:240px}.slide .steps th:nth-child(3){width:250px}.slide .steps th:nth-child(4){width:200px}.slide .steps th:nth-child(6){width:110px}
+.slide .steps td.t{font:400 16px/1.6 var(--mono);color:#fff;white-space:nowrap}
+
+/* pages that hand off to the operation page */
+.slide .handoff{font-size:24px;padding:10px 28px;border-width:2px;font-weight:700}
+.slide .handoff::after{font-size:14px;margin-top:3px}
+.slide.vv.op .text{gap:15px}
+.slide.vv.op .key{font-size:40px}
+.slide.vv.op .desc{font-size:26px}
+.slide.vv.op .how{padding-top:14px;gap:8px 24px}
+.slide.say .handoff{align-self:center}
+.slide.say{gap:26px}
+.slide.tbl .handoff{margin-top:2px}
+
+/* listen: an audio player on the left, the transcript that follows it on the right */
+.slide.listen{flex-direction:row;align-items:stretch;gap:64px;padding-top:56px}
+.slide.listen .text{flex:0 0 440px;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.slide.listen .key{font-size:56px}
+.slide.listen .desc{font-size:24px;color:#cfcfcf}
+.slide.listen audio{width:100%;height:44px;margin-top:6px}
+.slide.listen .cues{flex:1 1 auto;min-width:0;overflow-y:auto;border-left:1px solid var(--line);padding:0 8px 0 36px;scroll-behavior:smooth;position:relative}
+.slide.listen .cues p{margin:0;padding:9px 0;font-size:25px;line-height:1.6;font-weight:300;color:#6e6e6e;cursor:pointer;transition:color .2s}
+.slide.listen .cues p.past{color:#a8a8a8}
+.slide.listen .cues p.on{color:#fff;font-weight:700}
+.slide.listen .cues:not(:has(.on)) p{color:#cfcfcf}

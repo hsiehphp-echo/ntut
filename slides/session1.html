@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-Hant" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第一堂上課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
+<link rel="stylesheet" href="deck-vv.css">
+<script src="deck.js" defer></script>
+</head>
+<body>
+<main class="deck" data-lesson="1" data-title="第一堂">
+  <section class="slide vv" id="p-title">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半是一個點，代表重點；右半是一條不中斷、來回折成四行的線，代表完整的原文">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">重點</text><text class="lab" x="375" y="130">完整</text>
+        <g data-anim="fade" data-anim-delay="0.3"><circle class="w" cx="125" cy="310" r="13"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><path class="ln" d="M300 250 H450 a20 20 0 0 1 0 40 H300 a20 20 0 0 0 0 40 H450 a20 20 0 0 1 0 40 H300"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="eyebrow">系列 WORKSHOP・第一堂</p>
+      <h1 class="key">拆開任務：<br>好學生筆記與四象限</h1>
+      <p class="sub">讓扎實的學習回到完整</p>
+    </div>
+  </section>
+  <section class="slide vv" id="p-tribute">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="白色方框裡寫著 VISUALIZE VALUE">
+        <rect class="bx" x="70" y="70" width="360" height="360"/>
+        <text x="250" y="238" font-size="44" text-anchor="middle" font-weight="900" letter-spacing="6">VISUALIZE</text>
+        <text x="250" y="298" font-size="44" text-anchor="middle" font-weight="900" letter-spacing="6">VALUE</text>
+      </svg></figure>
+    <div class="text">
+      <p class="no">00</p>
+      <h2 class="key">致敬與緣起</h2>
+      <p class="pair">JACK BUTCHER</p>
+      <p class="desc">同一個畫面，切成兩半。<br>沒有對錯，只有選擇。</p>
+      <dl class="how">
+        <dt>2026.01</dt><dd>The Physics of Insight</dd>
+        <dt>2026.10</dt><dd>說話與聽話</dd>
+        <dt>2026.11</dt><dd>今天，帶進你的電腦</dd>
+      </dl>
+    </div>
+  </section>
+  <section class="slide listen" id="p-listen">
+    <div class="text">
+      <p class="no">先看成果</p>
+      <h2 class="key">聲音 vs 文字</h2>
+      <p class="desc">同一段三分鐘閃講，右側逐字稿跟著聲音走。請同時感受兩種輸入。</p>
+      <audio controls preload="metadata" src="media/lightalking.mp3"></audio>
+      <dl class="how">
+        <dt>聲音</dt><dd>有表情：它會提醒你該注意哪裡、讓你對關鍵字產生興趣。</dd>
+        <dt>文字</dt><dd>好閱讀：你能看到深度，而讀完文字往往比聽完一場演講更省時間。</dd>
+      </dl>
+    </div>
+    <div class="cues" aria-label="逐字稿，完整保留，跟著聲音走"><p data-t="0.0">大家好，我是江碩濤。</p><p data-t="4.0">因為今天的場子，我是來自中鼎工程，我們是在做比較大型的工程顧問開發的公司。</p><p data-t="14.0">我想在 Claude code 的應用上面，今天想要把這個好學生筆記分享給大家，這是我自己做的一個學習的專案。</p><p data-t="22.0">想把這個分享給大家。同學只要把這個簡報連結點開，它就是一個連結，未來所有裡面的東西都是開源，可以直接使用的。</p><p data-t="31.0">這樣子的一個工具的使用上面，其實我把它分成四個大項目來跟大家討論。</p><p data-t="38.0">因為從剛剛 Hana 的簡報以及前面很多三講的三位四位的好朋友，他們都有提到，就是在 Claude code 的應用上面，或者是大型語言模型的應用上面，</p><p data-t="51.0">在去年開始就有所謂的 tool use 的部分。這個東西就是要麻煩兩位老師在未來跟同學之間互動。</p><p data-t="60.0">我覺得 Git 是一個很重要的入門磚。也就是說，所有的開源的東西，我們要讓同學知道不要一股腦去做輪子，</p><p data-t="70.0">反而是要如何在 Git 上面去拿到別人，站在巨人的肩膀上面去找到輪子。</p><p data-t="76.0">那像剛剛 Hana 也有提到一些 skill 的應用上面呢，那我們如何去篩選好的 skill 呢？</p><p data-t="82.5">其實是從 Git 上面被 fork 以及被 star 的數量，然後去找到更好的資源，</p><p data-t="89.239">然後透過 Claude 裡面有一個叫做 plan mode 的方式，你可以在它的按 shift 的部分去做切換。Claude 在做所謂的計劃行為上面，它是一個相當有優勢的前端工具，可在 tool use 上使用。</p><p data-t="109.233">第二是大語言模型，能夠做文字拼接。</p><p data-t="114.993">我相信大家在這兩三年的應用上已經非常有心得了。</p><p data-t="120.433">再來就是 agent，所有同學在使用東西中會去把工作做切分。</p><p data-t="126.593">善用 agent 以及善用所謂的 co-work，是一個很重要的工具的做法。</p><p data-t="132.593">那如果你有到簡報裡面，你可以去點右邊這個開源的小工具。</p><p data-t="137.093">我們所謂在把好學生筆記上面，當中的「筆記」其實在談的事情呢，是快速地去簡化以及去做摘要。</p><p data-t="145.394">而這個筆記最大的不一樣是，它去做完整的逐字稿的拼接。</p><p data-t="149.593">也就是像我們今天剛剛有三場的簡報，我認為每一個人的簡報裡面每一個字都是精華。</p><p data-t="155.593">甚至我對每一個人的頓點，都應該要被記錄下來。</p><p data-t="159.633">好學生筆記它會透過這樣子的一個做法，去把所有的東西做一個完整的記錄。</p><p data-t="165.433">大家可以回去試試看，上面有一個很好的做法。</p><p data-t="168.433">那我想說提供給同學們，或者是在用 Claude code 的人的一種經驗上面分享，就是第一個，善用終端機。</p><p data-t="176.033">因為終端機是一個唯一可以讓你進入到你的電腦裡面去做事的一個工具。</p><p data-t="180.753">第二個就是學會分解你的任務。</p><p data-t="182.834">很多人都在學 prompt engineer，但是我建議的做法有點像剛剛有台下的朋友提出的，用錄音的方式。但你用錄音的方式來跟你的同學做對話的時候，你在跟人的對話裡面就是最好的 prompt。</p><p data-t="197.834">這就是我給大家最好的建議。就這樣，以上這兩個會有特別的訣竅。謝謝。</p></div>
+  </section>
+  <section class="slide proof" id="p-signals">
+    <p class="no">01　兩個訊號</p>
+    <h2 class="key">產出越來越便宜，好資料越來越少</h2>
+    <div class="row">
+      <figure>
+        <img src="img/vv_karpathy.webp" alt="Andrej Karpathy 在 X 的貼文截圖，其中一句被標成黃色：可以請 AI 做大量、客製、用完即丟的軟體">
+        <figcaption>可以請 AI 做大量、客製、用完即丟的軟體</figcaption>
+      </figure>
+      <figure>
+        <img src="img/vv_matsuo.webp" alt="東京大學松尾・岩澤研究室講義的表格：高品質語言資料的存量預測約在 2024 年用盡">
+        <figcaption>高品質語言資料，預測約 2024 年用盡<br><span class="src">來源：X @karpathy；東京大學松尾・岩澤研究室 LLM 講座 Day 5</span></figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="slide vv" id="p-notwork">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「工作」是一支往前的橫向箭頭；右半「學習」是從表面往下深入的箭頭">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">工作</text><text class="lab" x="375" y="130">學習</text>
+        <g data-anim="fade" data-anim-delay="0.3"><path class="ln" d="M50 310 H198 M180 294 L200 310 L180 326"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><path class="ln" d="M300 240 H450 M375 240 V400 M359 382 L375 402 L391 382"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">02</p>
+      <h2 class="key">學習不是工作</h2>
+      <p class="pair">FASTER vs. DEEPER</p>
+      <p class="desc">學習不是往更有效率邁進，<br>而是往更具體、學得到、學得好。</p>
+      
+      
+    </div>
+  </section>
+  <section class="slide vv" id="p-restore">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「壓縮」是五條線收成一個點；右半「還原」是一個點展開回五條線，左右鏡像">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">壓縮</text><text class="lab" x="375" y="130">還原</text>
+        <g data-anim="fade" data-anim-delay="0.3"><path class="ln" d="M50 230 L186 306 M50 270 L186 308 M50 310 H186 M50 350 L186 312 M50 390 L186 314"/><circle class="w" cx="202" cy="310" r="9"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><circle class="w" cx="298" cy="310" r="9"/><path class="ln" d="M314 306 L450 230 M314 308 L450 270 M314 310 H450 M314 312 L450 350 M314 314 L450 390"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">03</p>
+      <h2 class="key">我選擇的學習</h2>
+      <p class="pair">COMPRESSION vs. RESTORATION</p>
+      <p class="desc">大多數人要求 AI 摘要，<br>把牛排打成肉泥。<br>我要求 AI 縫合，<br>還原語氣與靈魂。</p>
+      
+      
+    </div>
+  </section>
+  <section class="slide vv" id="p-sentence">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「可以」是一個勾；右半「再看看」是一個問號。同一句話，兩個人聽到的不一樣">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">可以</text><text class="lab" x="375" y="130">再看看</text>
+        <g data-anim="fade" data-anim-delay="0.3"><path class="ln" stroke-width="7" d="M80 312 L112 348 L172 268"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><text x="375" y="368" font-size="170" font-weight="900" text-anchor="middle">?</text></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">04　先聽一句話</p>
+      <h2 class="key">AI 過度的摘要<br>會把「再看看」<br>變成「同意」</h2>
+      <p class="pair">HEARD vs. SAID</p>
+      <p class="desc">「這個你們再看看，<br>原則上應該可以。」</p>
+      
+      
+    </div>
+  </section>
+  <section class="slide vv" id="p-retention">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「速讀」的曲線衝高後掉回零；右半「留存」的曲線上升後停在高處">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">速讀</text><text class="lab" x="375" y="130">留存</text>
+        <g data-anim="fade" data-anim-delay="0.3"><path class="ln th" d="M50 220 V400 H200"/><path class="ln" d="M50 400 L122 240 L138 400"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><path class="ln th" d="M300 220 V400 H450"/><path class="ln" d="M300 400 L378 262 Q390 240 412 240 H450"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">05</p>
+      <h2 class="key">時間投資回報</h2>
+      <p class="pair">SPEED vs. RETENTION</p>
+      <p class="desc">真正的效率不是讀得快，<br>而是忘得慢。</p>
+      
+      
+    </div>
+  </section>
+  <section class="slide vv op" id="p-you">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「聊天」是一個對話框；右半「專案」是一個資料夾">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">聊天</text><text class="lab" x="375" y="130">專案</text>
+        <g data-anim="fade" data-anim-delay="0.3"><path class="ln" d="M55 250 H195 V345 H110 L80 378 V345 H55 Z"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><path class="ln" d="M300 258 H352 L370 280 H450 V380 H300 Z"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">06　今天的 AI 是誰</p>
+      <h2 class="key">所有用這種形式<br>和你對話的「你們」</h2>
+      <p class="pair">CHAT vs. PROJECT</p>
+      <p class="desc">把 AI 帶進你的電腦，<br>一個專案，一個包裹。</p>
+      <dl class="how"><dt>模型</dt><dd>Claude、Google Gemini、GPT</dd><dt>介面</dt><dd>CLI、IDE、瀏覽器</dd></dl>
+      <a class="handoff" href="https://goodedunote.web.app/prepare/session1-lab.html#s0">動手 S0：開起來</a>
+    </div>
+  </section>
+  <section class="slide vv" id="p-notes">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「字幕」是被切成一格一格的短線；右半「文章」是連成段落的長線">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">字幕</text><text class="lab" x="375" y="130">文章</text>
+        <g data-anim="fade" data-anim-delay="0.3"><path class="ln" d="M50 240 h8 M76 240 h92 M50 284 h8 M76 284 h58 M50 328 h8 M76 328 h120 M50 372 h8 M76 372 h76 M50 416 h8 M76 416 h104"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><path class="ln" d="M300 240 H450 M300 284 H450 M300 328 H450 M300 372 H450 M300 416 H392"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">07</p>
+      <h2 class="key">好學生筆記</h2>
+      <p class="pair">SUBTITLES vs. A TEXT YOU CAN READ</p>
+      <p class="desc">不做重點。<br>不做摘要。<br>只讓逐字稿「好讀」。</p>
+      <dl class="how"><dt>為什麼</dt><dd>放回完整段落，才讀得出斷句、改口與語氣。</dd></dl>
+      
+    </div>
+  </section>
+  <section class="slide wide" id="p-matrix">
+    <p class="no">08</p>
+    <h2 class="key">學習的四個象限</h2>
+    <figure class="vis">
+      <svg viewBox="0 0 1088 430" width="1088" height="430" role="img" aria-label="畫面被切兩刀：橫向左邊完整、右邊重點，縱向上面初學、下面精通。左上第二象限理解過程是起點，接著右上第一象限建立入口、左下第三象限追查與檢核、右下第四象限交換與判斷">
+        <path class="ln th" d="M544 6 V400 M150 203 H938"/>
+        <g class="cap"><text x="186" y="426">完整</text><text x="902" y="426">重點</text><text x="100" y="108">初學</text><text x="100" y="312">精通</text></g>
+        <g data-anim="fade" data-anim-delay="0.2"><rect class="w" x="170" y="28" width="354" height="155"/><text x="198" y="96" font-size="36" font-weight="900" style="fill:#000">II　理解過程</text><text x="198" y="146" font-size="24" style="fill:#000">從這裡開始</text></g>
+        <g data-anim="fade" data-anim-delay="0.9"><text x="592" y="96" font-size="36" font-weight="900">I　建立入口</text></g>
+        <g data-anim="fade" data-anim-delay="1.5"><text x="198" y="301" font-size="36" font-weight="900">III　追查與檢核</text></g>
+        <g data-anim="fade" data-anim-delay="2.1"><text x="592" y="301" font-size="36" font-weight="900">IV　交換與判斷</text></g>
+      </svg>
+    </figure>
+  </section>
+  <section class="slide vv" id="p-entry">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「終點」是一個點停在一道牆前；右半「入口」是同一個點，後面通往三行原文">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">終點</text><text class="lab" x="375" y="130">入口</text>
+        <g data-anim="fade" data-anim-delay="0.3"><circle class="w" cx="96" cy="310" r="13"/><path class="ln" stroke-width="7" d="M160 250 V370"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><circle class="w" cx="312" cy="310" r="13"/><path class="ln" d="M338 310 H366 M356 300 L368 310 L356 320 M392 270 H450 M392 310 H450 M392 350 H450"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">09</p>
+      <h2 class="key">完整的逐字稿都讀完，才能夠進入重點</h2>
+      <p class="pair">AN END vs. A WAY IN</p>
+      <p class="desc">重點，可以是回到原文的入口。</p>
+      
+      
+    </div>
+  </section>
+  <section class="slide vv" id="p-layers">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「混著」是實線、虛線、波浪線交叉在一起；右半「分開」是同樣三條線各自平行">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">混著</text><text class="lab" x="375" y="130">分開</text>
+        <g data-anim="fade" data-anim-delay="0.3"><path class="ln" d="M50 250 L200 380"/><path class="ln ds" d="M50 380 L200 250"/><path class="ln" d="M50 315 q19 -30 38 0 t38 0 t38 0 t36 0"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><path class="ln" d="M300 255 H450"/><path class="ln ds" d="M300 315 H450"/><path class="ln" d="M300 375 q19 -30 38 0 t38 0 t38 0 t36 0"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">10</p>
+      <h2 class="key">台上老師的課程、<br>讓 AI 補充、<br>你的整理與補充，分開放！</h2>
+      <p class="pair">MIXED vs. APART</p>
+      
+      <dl class="how"><dt>原文</dt><dd>需要被閱讀，並且不能改</dd><dt>AI 補述</dt><dd>要註記「非原文」</dd><dt>你的理解</dt><dd>由學習者親手寫</dd></dl>
+      
+    </div>
+  </section>
+  <section class="slide vv op" id="p-script">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「腳本」是一條直線上四個一模一樣、等距的方塊；右半「接龍」是六個一個接一個的圓圈，接著接著就彎出去了">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">腳本</text><text class="lab" x="375" y="130">接龍</text>
+        <g data-anim="fade" data-anim-delay="0.3"><path class="ln th" d="M50 315 H200"/><rect class="w" x="50" y="301" width="28" height="28"/><rect class="w" x="91" y="301" width="28" height="28"/><rect class="w" x="132" y="301" width="28" height="28"/><rect class="w" x="172" y="301" width="28" height="28"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><circle class="bx" cx="308" cy="372" r="15"/><circle class="bx" cx="337" cy="356" r="15"/><circle class="bx" cx="364" cy="334" r="15"/><circle class="bx" cx="388" cy="307" r="15"/><circle class="bx" cx="408" cy="276" r="15"/><circle class="bx" cx="436" cy="262" r="15"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">11</p>
+      <h2 class="key">確定性的工作交給工具，<br>需要判斷的工作才交給 LLM</h2>
+      <p class="pair">FUNCTION CALL vs. LANGUAGE MODEL</p>
+      
+      <dl class="how"><dt>腳本</dt><dd>照規則做，每次結果一樣</dd><dt>LLM</dt><dd>一個字接一個字，每次不一定一樣</dd></dl>
+      <a class="handoff" href="https://goodedunote.web.app/prepare/session1-lab.html#s1">動手 S1：請 AI 寫腳本，讀字幕</a>
+    </div>
+  </section>
+  <section class="slide vv" id="p-split">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「一次」是一大團看不見裡面的白色圓；右半「拆開」是四個小方格一格接一格">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">一次</text><text class="lab" x="375" y="130">拆開</text>
+        <g data-anim="fade" data-anim-delay="0.3"><circle class="w" cx="125" cy="315" r="78"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><path class="ln th" d="M375 220 V410"/><rect class="bx" x="355" y="215" width="40" height="40"/><rect class="bx" x="355" y="272" width="40" height="40"/><rect class="bx" x="355" y="329" width="40" height="40"/><rect class="bx" x="355" y="386" width="40" height="40"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">12</p>
+      <h2 class="key">差別不在模型，<br>而在我們有沒有<br>把任務拆開</h2>
+      <p class="pair">ONE-SHOT vs. PHASES</p>
+      
+      
+      
+    </div>
+  </section>
+  <section class="slide vv op" id="p-handoff">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「交出」是兩個方格之間直接連一條線；右半「確認」是同樣兩個方格，交接的地方多一個勾">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">交出</text><text class="lab" x="375" y="130">確認</text>
+        <g data-anim="fade" data-anim-delay="0.3"><rect class="bx" x="45" y="285" width="50" height="50"/><rect class="bx" x="155" y="285" width="50" height="50"/><path class="ln" d="M95 310 H155"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><rect class="bx" x="295" y="285" width="50" height="50"/><rect class="bx" x="405" y="285" width="50" height="50"/><path class="ln" d="M345 310 H405"/><path class="ln" stroke-width="5" d="M358 258 l11 12 l22 -27"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">13</p>
+      <h2 class="key">拆解每一步的同時，<br>每步都需要考量四件事</h2>
+      <p class="pair">HAND OVER vs. CONFIRM</p>
+      
+      <dl class="how"><dt>輸入</dt><dd>讀哪些檔案（上一步交出來的）</dd><dt>工具</dt><dd>誰來做</dd><dt>輸出</dt><dd>留下哪些檔案</dd><dt>檢查</dt><dd>怎麼知道做對了</dd></dl>
+      <a class="handoff" href="https://goodedunote.web.app/prepare/session1-lab.html#s2">動手 S2：擬訂計畫</a>
+    </div>
+  </section>
+  <section class="slide vv op" id="p-skip">
+    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「跳過」是一道虛線弧從樓梯底直接跳到頂；右半「逐步」是一階一階走上去的樓梯">
+        <path class="ln th" d="M250 40 V460"/>
+        <text class="lab" x="125" y="130">跳過</text><text class="lab" x="375" y="130">逐步</text>
+        <g data-anim="fade" data-anim-delay="0.3"><path class="ln th gr" d="M50 400 h38 v-40 h38 v-40 h38 v-40 h38"/><path class="ln ds" d="M62 386 Q84 226 190 262"/></g>
+        <g data-anim="fade" data-anim-delay="1.1"><path class="ln" d="M300 400 h38 v-40 h38 v-40 h38 v-40 h38"/></g>
+      </svg></figure>
+    <div class="text">
+      <p class="no">14</p>
+      <h2 class="key">是不是能夠跳過？<br>能夠簡化？</h2>
+      <p class="pair">SKIP vs. STEP BY STEP</p>
+      <p class="desc">關鍵在這一步用的是腳本，<br>還是 LLM 的語意處理。</p>
+      
+      <a class="handoff" href="https://goodedunote.web.app/prepare/session1-lab.html#s3">動手 S3：把字幕變回文章</a>
+    </div>
+  </section>
+  <section class="slide tbl" id="p-route">
+    <p class="no">15　好學生筆記的分工</p>
+    <h2 class="key">一步一步的做，才能確保傳遞上沒有遺漏</h2>
+    <table class="steps">
+      <thead><tr><th></th><th>階段</th><th>誰做</th><th>交出什麼</th><th>下一步先確認</th><th>今天</th></tr></thead>
+      <tbody><tr><th>1</th><td class="s">聲音變成字幕</td><td>■ 工具：語音轉文字</td><td>帶時間軸的字幕</td><td>講者姓名、專有名詞</td><td class="t">示範</td></tr><tr><th>2</th><td class="s">翻譯成雙軌字幕</td><td>■ 腳本鎖時間軸<br>● LLM 只翻文字</td><td>雙軌字幕</td><td>時間軸沒被改掉或漏掉</td><td class="t">中文場不用</td></tr><tr><th>3</th><td class="s">把字幕變回一篇文章</td><td>■ 拿掉時間軸、校正名詞<br>● 標點、前後承接</td><td>好學生筆記全文</td><td>字數沒少，每一段都還在</td><td class="t">S1、S3</td></tr><tr><th>4</th><td class="s">名詞補充</td><td>● LLM</td><td>術語旁邊的說明</td><td>原文沒有被動到</td><td class="t">S3</td></tr><tr><th>5</th><td class="s">立場筆記</td><td>● LLM，用我的身份</td><td>我的視角與類比</td><td>原文沒有被動到</td><td class="t">S3</td></tr><tr><th>6</th><td class="s">好學生矩陣</td><td>● LLM</td><td>重點卡、追查、連結</td><td>每張卡都連回原文段落</td><td class="t">課間練習</td></tr></tbody>
+    </table>
+    <p class="sub">• 人：決定這次要做到哪一步、確認專有名詞，以及最後的判斷</p>
+    <a class="handoff" href="https://goodedunote.web.app/prepare/session1-lab.html#s4">動手 S4：跑檢查，寫下你的理解</a>
+  </section>
+  <section class="slide say" id="p-close">
+    <p class="no">帶回去</p>
+    <h2 class="key">省掉的每一個字元，<br>伴隨著怎樣的惋惜。</h2>
+    <ul class="three">
+      <li><b>一</b>把任務拆成 phase，每個 phase 只做一件事。</li>
+      <li><b>二</b>確定性的工作給工具，判斷的工作給 AI，最後的決定給人。</li>
+      <li><b>三</b>每一個 phase 的產物都留下來，它們本身就是學習的材料。</li>
+    </ul>
+    <a class="handoff" href="https://goodedunote.web.app/prepare/session1-lab.html#wrap">收尾：兩人互查</a>
+  </section>
+
+</main>
+</body>
+</html>

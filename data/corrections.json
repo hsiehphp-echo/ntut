@@ -1,0 +1,127 @@
+[
+  {
+    "wrong": "江書濤",
+    "right": "江碩濤",
+    "why": "講者姓名（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "中領工程",
+    "right": "中鼎工程",
+    "why": "講者任職的公司（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "漢娜",
+    "right": "Hana",
+    "why": "同場另一位講者（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "Hanna",
+    "right": "Hana",
+    "why": "同一個人，寫法統一（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "有三講的簡報",
+    "right": "有三場的簡報",
+    "why": "聽錯一個字（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "Cloudboard",
+    "right": "Claude Code",
+    "why": "工具名稱（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "Cloud Core",
+    "right": "Claude Code",
+    "why": "工具名稱（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "Cloud4",
+    "right": "Claude Code",
+    "why": "工具名稱（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "Cloud",
+    "right": "Claude",
+    "why": "模型名稱常被聽成 Cloud（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "Clod",
+    "right": "Claude",
+    "why": "模型名稱（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "Tool and Course",
+    "right": "tool use",
+    "why": "術語：讓模型使用工具（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "Tool Cost",
+    "right": "tool use",
+    "why": "術語：讓模型使用工具（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "playlandmode",
+    "right": "plan mode",
+    "why": "Claude Code 的計畫模式（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "stark",
+    "right": "star",
+    "why": "GitHub 的 star（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "Literary",
+    "right": "LLM",
+    "why": "術語：大語言模型（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "大圓模型",
+    "right": "大語言模型",
+    "why": "術語（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "Aging",
+    "right": "agent",
+    "why": "術語（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "Crown Engineer",
+    "right": "prompt engineer",
+    "why": "術語：提示工程（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "入門專。",
+    "right": "入門磚。",
+    "why": "同音錯字（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "佔要",
+    "right": "摘要",
+    "why": "同音錯字（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "處置稿",
+    "right": "逐字稿",
+    "why": "同音錯字（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "配接",
+    "right": "拼接",
+    "why": "聽錯一個字（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "中端機",
+    "right": "終端機",
+    "why": "同音錯字（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "坐實",
+    "right": "做事",
+    "why": "聽錯（以講者公開的成果頁為準）"
+  },
+  {
+    "wrong": "就是最好的地方",
+    "right": "就是最好的 prompt",
+    "why": "整個詞沒聽到（以講者公開的成果頁為準）"
+  }
+]
