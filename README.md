@@ -32,7 +32,7 @@
 
 5. 接下來照[實作頁](https://goodedunote.web.app/prepare/session1-lab.html)的 S1 到 S4 做。所有提示詞也收在這個專案的 [`prompts.md`](prompts.md)。
 
-之後老師更新了內容，在 `ntut` 資料夾裡跑 `git pull` 就會拿到。你自己做出來的檔案不會被動到。
+之後老師更新了內容，在 `ntut` 資料夾裡跑 `git pull` 就會拿到。你自己做出來的檔案不會被動到。唯一的例外：如果你自己在 `data/corrections.json` 加過校正用語，而老師也更新了這個檔案，`git pull` 會說有衝突。這時先把你加的那幾條抄下來，執行 `git checkout data/corrections.json` 還原，再 `git pull`，然後把你的那幾條加回去。
 
 ## 資料夾裡有什麼
 

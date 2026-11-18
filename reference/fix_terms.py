@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """備援腳本（講師的版本）：照「校正用語」清單，把語音辨識聽錯的專有名詞換成對的。
 
 用法：python3 tools/fix_terms.py

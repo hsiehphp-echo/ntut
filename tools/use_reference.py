@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """備援：把講師寫好的腳本拿來用，讓你可以繼續往下做。
 
 用法：python3 tools/use_reference.py            兩支都拿

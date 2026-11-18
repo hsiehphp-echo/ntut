@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """檢查 plan.md：至少 5 個編號步驟，每步有 輸入／工具／輸出／檢查 四欄。
 
 用法：python3 tools/plan_check.py [--root DIR]

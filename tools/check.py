@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """好學生筆記的閘門 G0–G8：每一步交給下一步之前，先確認上一步的成果還在。
 
 用法：python3 tools/check.py [--only G1,G2 | --before-understanding] [--root DIR]

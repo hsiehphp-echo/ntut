@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """腳本：把現在有的檔案做成一頁可以讀的網頁 site/index.html。
 
 用法：python3 tools/render.py [--root DIR]

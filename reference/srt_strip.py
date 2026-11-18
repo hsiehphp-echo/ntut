@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """備援腳本（講師的版本）：把字幕檔的時間軸拿掉，只留下每一段講者說的話。
 
 用法：python3 tools/srt_strip.py
