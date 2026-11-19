@@ -34,35 +34,58 @@
 
 之後老師更新了內容，在 `ntut` 資料夾裡跑 `git pull` 就會拿到。你自己做出來的檔案不會被動到。唯一的例外：如果你自己在 `data/corrections.json` 加過校正用語，而老師也更新了這個檔案，`git pull` 會說有衝突。這時先把你加的那幾條抄下來，執行 `git checkout data/corrections.json` 還原，再 `git pull`，然後把你的那幾條加回去。
 
-## 資料夾裡有什麼
+## 現在資料夾裡有什麼
+
+你剛 clone 下來，在 VS Code 左邊看到的就是下面這些，不多也不少（隱藏的 `.git` 不算）。
 
 | 路徑 | 是什麼 | 誰可以改 |
 |---|---|---|
+| `README.md` | 這份說明 | 沒有人 |
 | `CLAUDE.md` | 給 AI 看的班規。這個專案唯一的規則檔 | 沒有人 |
 | `AGENTS.md`、`GEMINI.md`、`.github/copilot-instructions.md` | 只有一行，指向 `CLAUDE.md`。不同的 AI 工具會找不同的檔名 | 沒有人 |
 | `spec.md` | 筆記的規格：要做出什麼、每一步的規則 | 沒有人 |
-| `scripts_spec.md` | 兩支腳本的規格：你請 AI 寫腳本時的訂單 | 沒有人 |
+| `scripts_spec.md` | 兩支腳本的規格（輸入、輸出格式、規則）：你請 AI 寫腳本時的訂單 | 沒有人 |
 | `prompts.md` | 今天用到的每一段提示詞，照順序 | 沒有人 |
 | `source/transcript.srt` | 來源：閃講的字幕檔，51 段，有聽錯的專有名詞 | 沒有人（唯讀） |
-| `data/corrections.json` | 校正用語清單：聽錯的詞 → 對的詞，25 條 | 你確認之後可以加 |
+| `data/corrections.json` | 校正用語清單：聽錯的詞 → 對的詞，25 條。`data/` 裡現在只有這一個檔案 | 你確認之後可以加 |
 | `tools/check.py` | 九道閘門 G0 到 G8 | 沒有人 |
 | `tools/render.py` | 把現在有的檔案做成一頁網頁 `site/index.html` | 沒有人 |
 | `tools/plan_check.py` | 檢查計畫 `plan.md` 的格式 | 沒有人 |
-| `tools/use_reference.py` | 備援：把講師寫好的腳本拿來用 | 沒有人 |
-| `reference/` | 講師寫好的兩支腳本。**先不要打開**，見下面「雙軌」 | 沒有人 |
+| `tools/gsn.py` | 給 `check.py` 和 `render.py` 用的小函式 | 沒有人 |
+| `tools/use_reference.py` | 備援：把老師寫好的腳本拿來用 | 沒有人 |
+| `reference/srt_strip.py`、`reference/fix_terms.py` | 老師寫好的兩支腳本。**先不要打開**，見下面「雙軌」 | 沒有人 |
 | `slides/` | 第一堂的簡報。用瀏覽器打開 `slides/session1.html` | 沒有人 |
+| `LICENSE`、`.gitignore`、`.gitattributes` | 授權與 git 的設定 | 沒有人 |
 
-你會做出來的檔案：`tools/srt_strip.py`、`tools/fix_terms.py`（S1）、`data/cues*.json`（S1）、`plan.md`（S2）、`notes/cleaned.md`、`notes/notes.md`（S3）、`site/index.html`、`loop_log.md`、`understanding.md`（S4）。
+`tools/` 裡現在**沒有** `srt_strip.py` 和 `fix_terms.py`：那兩支是 S1 要請 AI 寫的。這個資料夾也**還沒有** `notes/`、`site/`，`data/` 裡也還沒有字幕文字。找不到它們不是你弄丟了，下一節說它們什麼時候出現。
+
+## 之後才會出現的檔案，由哪一步做出來
+
+| 檔案 | 什麼時候出現 | 誰做出來的 |
+|---|---|---|
+| `tools/srt_strip.py` | S1 第一支腳本 | AI 照 `scripts_spec.md` 寫（或 `use_reference.py` 放進來） |
+| `data/cues.json`、`data/raw.txt` | 跑完 `tools/srt_strip.py` 之後 | `tools/srt_strip.py`。`cues.json` 給程式讀，`raw.txt` 給你讀，一段一行 |
+| `tools/fix_terms.py` | S1 第二支腳本 | AI 照 `scripts_spec.md` 寫（或 `use_reference.py` 放進來） |
+| `data/cues_fixed.json`、`data/fixed.txt` | 跑完 `tools/fix_terms.py` 之後 | `tools/fix_terms.py`。格式和 `cues.json`、`raw.txt` 一樣，但已經換成對的專有名詞 |
+| `site/index.html` | 第一次跑 `tools/render.py` 之後（S1 做完就可以跑，之後每次檔案有改都要重跑） | `tools/render.py`（`site/` 資料夾也是這時才有） |
+| `plan.md` | S2 | AI 寫，你審。`python3 tools/plan_check.py` 檢查格式 |
+| `notes/cleaned.md` | S3 第一件事：把字幕變回一篇文章 | AI（`notes/` 資料夾也是這時才有） |
+| `notes/notes.md` | S3 第二件事：加上名詞補充與立場筆記 | AI |
+| `loop_log.md` | S4 的修正迴圈，每一輪記一行；S1 用了備援也記一行 | AI 或你（沒有工具會自動建立它，沒有就新增一個） |
+| `understanding.md` | S4 最後 | **你親手寫**，AI 不代筆 |
+| `tools/srt_strip.mine.py`、`tools/fix_terms.mine.py` | 只有你先寫了自己的腳本、後來又用了備援才會有 | `use_reference.py` 把你原本的那一支改名留下 |
+
+`data/cues.json` 和 `data/cues_fixed.json` 的格式（鍵名、每一段的欄位）寫在 [`scripts_spec.md`](scripts_spec.md) 裡。除了 `understanding.md`，這些檔案都是腳本或 AI 做出來的，你不用自己動手建立。
 
 ## 今天的五關
 
 | 關 | 做什麼 | 誰做 | 怎麼確認 |
 |---|---|---|---|
-| S0 | 把專案 clone 下來，AI 開在這個資料夾，先讀班規 | 你 | `check.py` 是 RED (1/9) |
-| S1 | 請 AI 寫兩支腳本：拿掉時間軸、校正專有名詞。然後自己讀 51 段字幕 | AI 寫腳本，腳本做事，你驗收 | `check.py --only G0,G1` 是 GREEN (2/2) |
-| S2 | 請 AI 擬訂計畫，你來審 | AI 擬，你審 | `plan_check.py` 是 GREEN (1/1) |
-| S3 | 把字幕變回一篇文章；再加名詞補充與立場筆記（用你的身份寫視角） | AI | 字數沒少、每一段都還在、原文沒被動到 |
-| S4 | 紅燈修到過（最多三輪），自己讀一遍，親手寫理解 | AI 修，你寫 | `check.py` 是 GREEN (9/9) |
+| S0 開起來 | 把專案 clone 下來，AI 開在這個資料夾，先讀班規 | 你 | `check.py` 是 RED (1/9) |
+| S1 請 AI 寫腳本 | 請 AI 寫兩支腳本：拿掉時間軸、校正專有名詞。然後自己讀 51 段字幕 | AI 寫腳本，腳本做事，你驗收 | `check.py --only G0,G1` 是 GREEN (2/2) |
+| S2 擬訂計畫 | 請 AI 擬訂計畫，你來審 | AI 擬，你審 | `plan_check.py` 是 GREEN (1/1) |
+| S3 把字幕變回文章 | 把字幕變回一篇文章（`notes/cleaned.md`）；再加名詞補充與立場筆記（`notes/notes.md`，用你的身份寫的視角） | AI | `--only G0,G1,G2,G3,G4` 是 GREEN (5/5)；`--only G5,G6` 是 GREEN (2/2) |
+| S4 跑檢查，寫下你的理解 | 紅燈修到過（最多三輪），自己讀一遍，親手寫下你的理解 | AI 修，你寫 | `check.py` 是 GREEN (9/9) |
 
 ## 雙軌：自己請 AI 寫腳本，或用備援
 
@@ -87,7 +110,7 @@ S1 的兩支腳本一開始不存在。你要用提示詞請 AI 照 [`scripts_sp
 python3 tools/use_reference.py
 ```
 
-Windows 請打 `py tools/use_reference.py`。它會把 `reference/` 裡講師的版本放進 `tools/`，你寫的那一支改名成 `*.mine.py` 留著對照。用了備援不是失敗：今天要學的是怎麼把訂單寫清楚、怎麼檢查，不是比誰的 AI 厲害。
+Windows 請打 `py tools/use_reference.py`。它會把 `reference/` 裡老師的版本放進 `tools/`，你寫的那一支改名成 `*.mine.py` 留著對照。用了備援不是失敗：今天要學的是怎麼把訂單寫清楚、怎麼檢查，不是比誰的 AI 厲害。
 
 ## AI 動手前要不要問你：四種啟動方式
 
@@ -125,7 +148,7 @@ AI 要寫檔或跑指令之前，會先問你可不可以。每一家工具都�
 | G3 | 51 段字幕每一段都還在 |
 | G4 | 沒有「講者提到……」這一類摘要句 |
 | G5 | 補述沒有動到全文 |
-| G6 | 每一塊補述都有標記（📖 名詞補充、🎯 身份視角） |
+| G6 | 每一塊補述都有標記（📖 名詞補充、🎯 立場筆記） |
 | G7 | 網頁和檔案同步 |
 | G8 | `understanding.md` 是你親手寫的 |
 

@@ -1,4 +1,4 @@
-"""備援：把講師寫好的腳本拿來用，讓你可以繼續往下做。
+"""備援：把老師寫好的腳本拿來用，讓你可以繼續往下做。
 
 用法：python3 tools/use_reference.py            兩支都拿
       python3 tools/use_reference.py srt_strip  只拿「拿掉時間軸」
@@ -37,8 +37,8 @@ def main() -> int:
             shutil.copyfile(dst, keep)
             print(f"[PASS] 你原本的 tools/{n}.py 另存成 tools/{n}.mine.py（留著對照，不會被執行）")
         shutil.copyfile(src, dst)
-        print(f"[PASS] 已把講師的版本放到 tools/{n}.py，現在可以跑 {PY} tools/{n}.py")
-    print("記得在 loop_log.md 記一行：哪一支用了備援、你的版本卡在哪裡。")
+        print(f"[PASS] 已把老師的版本放到 tools/{n}.py，現在可以跑 {PY} tools/{n}.py")
+    print("記得在 loop_log.md（沒有就新增一個）記一行：哪一支用了備援、你的版本卡在哪裡。")
     return 0
 
 

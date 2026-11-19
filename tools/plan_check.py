@@ -29,7 +29,7 @@ def main() -> int:
         em = False
     p = Path(a.root) / "plan.md"
     if not p.is_file():
-        print(f"[FAIL] {'❌ ' if em else ''}找不到 plan.md")
+        print(f"[FAIL] {'❌ ' if em else ''}找不到 plan.md（S2：請 AI 擬訂計畫，寫進專案資料夾最外層的 plan.md）")
         print("RESULT: RED (0/1)")
         return 1
     try:

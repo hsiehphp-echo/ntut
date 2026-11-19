@@ -2,9 +2,11 @@
 
 > **給學生的三行**：這份是你請 AI 寫腳本時的「訂單」。訂單寫得越清楚，每個人拿到的腳本就越一樣。寫完之後不是看程式碼對不對，而是跑閘門 G1：它會拿你的腳本做出來的結果，和標準答案一段一段比。
 
+**剛 `git clone` 下來的時候，這兩支腳本和它們產生的 `data/cues.json`、`data/raw.txt`、`data/cues_fixed.json`、`data/fixed.txt` 都還不存在**，是 S1 才請 AI 寫、才跑出來的。專案裡現在只有這份規格、輸入檔 `source/transcript.srt` 和 `data/corrections.json`，以及老師的備援 `reference/`。
+
 兩支腳本都放在 `tools/`，只用 Python 標準函式庫，不需要安裝任何套件。檔案一律用 UTF-8 讀寫：每一次開檔都要明確寫 `encoding="utf-8"`（讀檔可以用 `"utf-8-sig"`，順便吃掉 BOM），寫檔時加 `newline="\n"` 讓換行是 LF。Windows 的預設編碼不是 UTF-8，漏寫 `encoding` 就會寫出亂碼，G1 讀不懂。腳本要以「專案資料夾」為準找檔案（用腳本自己的位置往上一層），不要假設使用者在哪個資料夾執行。下面指令裡的 `python3`，Windows 請改用 `py`（沒有 `py` 就用 `python`）。
 
-請 AI 寫的時候，**不要讓它打開 `reference/`**。那裡面是講師寫好的備援，是寫了三次還不過的時候才拿出來用的。
+請 AI 寫的時候，**不要讓它打開 `reference/`**。那裡面是老師寫好的備援，是寫了三次還不過的時候才拿出來用的。
 
 ## 腳本一：`tools/srt_strip.py`（拿掉時間軸）
 
@@ -66,7 +68,7 @@
 不比程式碼，比結果。`python3 tools/check.py --only G0,G1` 會：
 
 - G0：確認 `source/transcript.srt` 沒有被改過。
-- G1：用講師的版本重做一次，和你的 `data/cues.json`、`data/cues_fixed.json` 一段一段比。有一段不一樣，就告訴你是第幾段、差在哪裡。
+- G1：用老師的版本重做一次，和你的 `data/cues.json`、`data/cues_fixed.json` 一段一段比。有一段不一樣，就告訴你是第幾段、差在哪裡。
 
 每個人請 AI 寫出來的程式碼都會不一樣，但 G1 綠燈代表做出來的 51 段文字完全相同。
 
@@ -78,4 +80,4 @@
 python3 tools/use_reference.py
 ```
 
-它會把講師的版本放進 `tools/`，你寫的那一支會改名成 `*.mine.py` 留著。用了備援不是失敗：今天要學的是怎麼把訂單寫清楚、怎麼檢查，不是比誰的 AI 厲害。
+它會把老師的版本放進 `tools/`，你寫的那一支會改名成 `*.mine.py` 留著。用了備援不是失敗：今天要學的是怎麼把訂單寫清楚、怎麼檢查，不是比誰的 AI 厲害。

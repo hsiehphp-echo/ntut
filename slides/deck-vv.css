@@ -15,8 +15,10 @@
 .slide .sub{font-size:28px;font-weight:300;color:var(--muted)}
 .slide .eyebrow{font:400 20px/1 var(--mono);letter-spacing:.22em;color:var(--muted)}
 .slide .handoff{color:#000}
-.slide-foot{font-size:16px;letter-spacing:.06em;color:#5c5c5c}
-.slide-foot a{color:#5c5c5c;text-decoration:none}
+.slide-foot,.slide-foot a{color:#8f8f8f}
+.slide-foot{font-size:16px;letter-spacing:.06em}
+.slide-foot a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.slide-foot .count{font-family:var(--mono)}
 .deck-progress{height:2px}
 body.show-notes .slide.active .notes{background:#111;color:#cfcfcf;border-top:1px solid var(--line);font-size:22px}
 
@@ -26,7 +28,7 @@ body.show-notes .slide.active .notes{background:#111;color:#cfcfcf;border-top:1p
 .slide .desc{margin:0;font-size:30px;line-height:1.6;font-weight:300}
 .slide .desc strong{font-weight:700}
 .slide .how{margin:6px 0 0;padding:20px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:12px 24px;align-items:baseline}
-.slide .how dt{margin:0;font:400 16px/1.4 var(--mono);letter-spacing:.2em;color:var(--muted)}
+.slide .how dt{margin:0;font:400 17px/1.4 var(--mono);letter-spacing:.2em;color:var(--muted)}
 .slide .how dd{margin:0;font-size:22px;line-height:1.5;color:#cfcfcf}
 .slide .src{margin:0;font-size:18px;color:var(--muted)}
 
@@ -70,7 +72,7 @@ body.show-notes .slide.active .notes{background:#111;color:#cfcfcf;border-top:1p
 /* closing list */
 .slide .three{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:left;border-top:1px solid var(--line);padding-top:26px;max-width:1088px}
 .slide .three li{font-size:23px;line-height:1.6;font-weight:300;color:#cfcfcf}
-.slide .three b{display:block;font:400 16px/1 var(--mono);letter-spacing:.2em;color:var(--muted);margin-bottom:10px}
+.slide .three b{display:block;font:400 17px/1 var(--mono);letter-spacing:.2em;color:var(--muted);margin-bottom:10px}
 
 /* drawings: white line on black, nothing else */
 .vis svg text{font-family:var(--sans);fill:#fff}
@@ -89,21 +91,24 @@ body.show-notes .slide.active .notes{background:#111;color:#cfcfcf;border-top:1p
 .vis svg .bxg{fill:#000;stroke:#4a4a4a;stroke-width:2}
 
 /* steps table: who does it, what is handed over, what the next step confirms first */
-.slide .steps{border-collapse:collapse;width:100%;font-size:19px;line-height:1.4;table-layout:fixed}
+.slide .steps{border-collapse:collapse;width:100%;font-size:20px;line-height:1.38;table-layout:fixed}
 .slide .steps th,.slide .steps td{padding:4px 16px 4px 0;text-align:left;border-top:1px solid var(--line);font-weight:300;color:#cfcfcf;vertical-align:baseline}
-.slide .steps thead th{border-top:0;font:400 16px/1.4 var(--mono);letter-spacing:.2em;color:var(--muted);padding-bottom:10px}
+.slide .steps thead th{border-top:0;font:400 17px/1.4 var(--mono);letter-spacing:.2em;color:var(--muted);padding-bottom:10px}
 .slide .steps tbody th{font:400 18px/1 var(--mono);color:var(--muted);width:44px}
 .slide .steps td.s{font-weight:900;color:#fff;font-size:22px;white-space:nowrap}
 .slide .steps tbody tr:last-child td,.slide .steps tbody tr:last-child th{border-bottom:1px solid var(--line)}
-.slide.tbl{gap:12px;padding-top:36px}
-.slide.tbl .key{font-size:40px}
+.slide.tbl{gap:10px;padding-top:32px}
+.slide.tbl .key{font-size:38px}
 .slide.tbl .sub{font-size:20px}
-.slide .steps th:nth-child(1){width:40px}.slide .steps th:nth-child(2){width:240px}.slide .steps th:nth-child(3){width:250px}.slide .steps th:nth-child(4){width:200px}.slide .steps th:nth-child(6){width:110px}
-.slide .steps td.t{font:400 16px/1.6 var(--mono);color:#fff;white-space:nowrap}
+.slide .steps th:nth-child(1){width:40px}.slide .steps th:nth-child(2){width:218px}.slide .steps th:nth-child(3){width:262px}.slide .steps th:nth-child(4){width:206px}.slide .steps th:nth-child(6){width:116px}
+.slide .steps td.t{font:400 18px/1.6 var(--mono);color:#fff;white-space:nowrap}
 
 /* pages that hand off to the operation page */
-.slide .handoff{font-size:24px;padding:10px 28px;border-width:2px;font-weight:700}
-.slide .handoff::after{font-size:14px;margin-top:3px}
+.slide .handoff{font-size:24px;padding:12px 32px 13px;border-width:2px;font-weight:700;transition:background-color .15s cubic-bezier(.2,.7,.2,1),color .15s cubic-bezier(.2,.7,.2,1)}
+.slide .handoff::after{content:"做完按「回到簡報」";font-size:17px;font-weight:400;opacity:1;margin-top:4px}
+.slide .handoff.first::after{content:"做完按實作頁上的「回到簡報」，回到這一頁"}
+.slide .handoff:hover,.slide .handoff:focus-visible{background:#000;color:#fff;border-color:#fff}
+.slide a:focus-visible{outline:2px solid #fff;outline-offset:4px}
 .slide.vv.op .text{gap:15px}
 .slide.vv.op .key{font-size:40px}
 .slide.vv.op .desc{font-size:26px}
@@ -118,8 +123,128 @@ body.show-notes .slide.active .notes{background:#111;color:#cfcfcf;border-top:1p
 .slide.listen .key{font-size:56px}
 .slide.listen .desc{font-size:24px;color:#cfcfcf}
 .slide.listen audio{width:100%;height:44px;margin-top:6px}
-.slide.listen .cues{flex:1 1 auto;min-width:0;overflow-y:auto;border-left:1px solid var(--line);padding:0 8px 0 36px;scroll-behavior:smooth;position:relative}
-.slide.listen .cues p{margin:0;padding:9px 0;font-size:25px;line-height:1.6;font-weight:300;color:#6e6e6e;cursor:pointer;transition:color .2s}
-.slide.listen .cues p.past{color:#a8a8a8}
+.slide.listen .cues{flex:1 1 auto;min-width:0;overflow-y:auto;border-left:1px solid var(--line);padding:0 8px 40px 36px;scroll-behavior:smooth;position:relative;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 64px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 64px),transparent)}
+.slide.listen .cues p{margin:0;padding:9px 0;font-size:25px;line-height:1.6;font-weight:300;color:#8f8f8f;cursor:pointer;transition:color .2s}
+.slide.listen .cues p.past{color:#b0b0b0}
 .slide.listen .cues p.on{color:#fff;font-weight:700}
 .slide.listen .cues:not(:has(.on)) p{color:#cfcfcf}
+
+/* chrome (spec D6, D7) */
+:root:root:root{--ease:cubic-bezier(.2,.7,.2,1)}
+[data-anim]{animation-timing-function:var(--ease)}
+.deck-hint{right:auto;left:50%;transform:translateX(-50%);bottom:6px;color:#8f8f8f;font:400 12px/1 var(--mono);letter-spacing:.12em}
+@media (max-height:480px){.deck-hint{display:none}}
+.slide.listen audio::-webkit-media-controls-enclosure{border-radius:0}
+/* listen: our own play / seek line (deck.js builds it and hides the native control); white line on black, nothing else */
+.slide.listen .player{display:flex;align-items:center;gap:18px;margin-top:8px;padding:18px 0 0;border-top:1px solid var(--line)}
+.slide.listen .player .play{flex:0 0 auto;display:inline-grid;place-items:center;width:56px;height:56px;padding:0;border-radius:50%;border:2px solid #fff;background:#fff;color:#000;cursor:pointer;transition:background-color .15s var(--ease),color .15s var(--ease)}
+.slide.listen .player .play:hover{background:#000;color:#fff}
+.slide.listen .player .play svg{width:22px;height:22px;display:block;fill:currentColor}
+.slide.listen .player .play .i-pause{display:none}
+.slide.listen .player.playing .play .i-play{display:none}
+.slide.listen .player.playing .play .i-pause{display:block}
+.slide.listen .player .play:focus-visible,.slide.listen .player .seek:focus-visible{outline:2px solid #fff;outline-offset:4px}
+.slide.listen .player .seekwrap{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px}
+.slide.listen .player .time{font:400 17px/1 var(--mono);letter-spacing:.08em;color:#8f8f8f;font-variant-numeric:tabular-nums}
+.slide.listen .player .seek{-webkit-appearance:none;appearance:none;width:100%;height:28px;margin:0;padding:0;background:transparent;cursor:pointer;--p:0%}
+.slide.listen .player .seek::-webkit-slider-runnable-track{height:2px;background:linear-gradient(#fff,#fff) 0 0/var(--p) 100% no-repeat,#3a3a3a}
+.slide.listen .player .seek::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;margin-top:-6px;border-radius:50%;border:0;background:#fff}
+.slide.listen .player .seek::-moz-range-track{height:2px;background:#3a3a3a}
+.slide.listen .player .seek::-moz-range-progress{height:2px;background:#fff}
+.slide.listen .player .seek::-moz-range-thumb{width:14px;height:14px;border-radius:50%;border:0;background:#fff}
+@media (orientation:portrait) and (max-width:700px){
+  .deck>.slide.listen .player{width:100%;gap:14px;padding-top:12px}
+  .deck>.slide.listen .player .play{width:52px;height:52px}
+  .deck>.slide.listen .player .time{font-size:14px}
+}
+
+/* line breaking: the four-line statement of slide 13 would leave one character alone on its last line; give it the 48px of right padding the other slides do not need */
+#p-layers .text{margin-right:-40px}
+#p-layers .key{font-size:44px}
+.slide .how dd{text-wrap:pretty}
+
+/* judge round 2: hint legible, native audio control in the system's greys */
+body.show-hint .deck-hint{opacity:1}
+.slide.listen audio{color-scheme:dark;filter:grayscale(1) contrast(1.2)}
+
+/* spec D8: phone in portrait reflows to one readable column (landscape and desktop are untouched) */
+@media (orientation:portrait) and (max-width:700px){
+  .deck>.slide{left:0;top:0;width:100vw;height:100svh;transform:none;flex-direction:column;justify-content:safe center;align-items:flex-start;gap:20px;padding:48px 24px 76px;overflow-y:auto;text-align:left}
+  .deck>.slide.vv,.deck>.slide.listen{flex-direction:column;align-items:flex-start}
+  .deck>.slide .vis,.deck>.slide.title .vis{position:static;flex:0 0 auto;width:min(64vw,260px);height:auto;aspect-ratio:1;margin:0}
+  .deck>.slide.wide .vis,.deck>.slide.proof .vis{width:100%;aspect-ratio:auto}
+  .deck>.slide .key,.deck>.slide.vv .key,.deck>.slide.vv h1.key,.deck>.slide.say .key,.deck>.slide.title .key,.deck>.slide.listen .key,.deck>.slide.tbl .key,.deck>.slide.vv.op .key,.deck>.slide.title h1.key{font-size:clamp(28px,8.4vw,40px);max-width:none}
+  .deck>.slide .desc,.deck>.slide .sub,.deck>.slide.vv.op .desc,.deck>.slide.listen .desc,.deck>.slide.title .sub{font-size:18px}
+  .deck>.slide .how{grid-template-columns:1fr;gap:4px}
+  .deck>.slide .how dd{font-size:16px}
+  .deck>.slide .handoff{font-size:18px;padding:12px 24px;align-self:flex-start}
+  .deck>.slide .trio,.deck>.slide .three{grid-template-columns:1fr}
+  .deck>.slide .steps{font-size:14px;table-layout:auto;width:100%}
+  .deck>.slide .steps td.t,.deck>.slide .steps td.s{font-size:14px}
+  .deck>.slide .steps th{width:auto!important;font-size:12px}
+  .deck>.slide .text,.deck>.slide.vv .text{margin-right:0;width:100%}
+  .deck>.slide.say{align-items:flex-start;text-align:left}
+  .deck>.slide .slide-foot{position:fixed;left:0;right:0;bottom:0;padding:10px 24px 12px;background:#000;border-top:1px solid var(--line);font-size:12px;letter-spacing:.02em;white-space:nowrap;gap:12px;z-index:5}
+  .deck>.slide .slide-foot>*{white-space:nowrap}
+  .deck>.slide{padding-bottom:104px}
+  .deck>.slide .key br{display:none}
+  .deck>.slide.tbl{overflow-x:hidden}
+  .deck>.slide.wide .vis{max-width:100%;justify-content:flex-start}
+  .deck>.slide.wide .vis svg,.deck>.slide.wide .vis img{min-width:0;width:100%;max-width:100%;height:auto}
+  .deck>.slide.tbl .steps{min-width:0;display:block;font-size:14px}
+  .deck>.slide.tbl .steps thead{display:none}
+  .deck>.slide.tbl .steps tbody,.deck>.slide.tbl .steps tr{display:block}
+  .deck>.slide.tbl .steps tr{padding:10px 0;border-top:1px solid var(--line)}
+  .deck>.slide.tbl .steps tr>th{display:inline;padding:0 8px 0 0;border:0;width:auto}
+  .deck>.slide.tbl .steps td{display:block;padding:2px 0;border:0}
+  .deck>.slide.tbl .steps td.s{display:inline;font-size:17px}
+  .deck>.slide.tbl .steps td:nth-child(n+3)::before{display:block;font:400 12px/1.4 var(--mono);letter-spacing:.14em;color:var(--muted);margin-top:6px}
+  .deck>.slide.tbl .steps td:nth-child(3)::before{content:"誰做"}
+  .deck>.slide.tbl .steps td:nth-child(4)::before{content:"交出什麼"}
+  .deck>.slide.tbl .steps td:nth-child(5)::before{content:"下一步先確認"}
+  .deck>.slide.tbl .steps td:nth-child(6)::before{content:"今天"}
+  .deck>.slide.wide .vis svg .cap{font-size:44px;font-weight:400}
+  .deck>.slide.wide .vis svg text[font-size="36"]{font-size:40px}
+  .deck>.slide.wide .vis svg text[font-size="24"]{font-size:30px}
+  .deck>.slide .vis,.deck>.slide.title .vis{width:min(56vw,220px);align-self:center}   /* r5: the split frame is the deck's main device, so it keeps its size on a phone (it was 148px) */
+  .deck>.slide{gap:16px}
+  .deck>.slide.listen{overflow:hidden;justify-content:flex-start}
+  .deck>.slide.listen .text{flex:0 0 auto;width:100%}
+  .deck>.slide.listen .cues{flex:1 1 0;min-height:0;width:100%;border-left:0;border-top:1px solid var(--line);padding:16px 0 24px;overflow-y:auto}
+  .deck>.slide.listen .cues p{font-size:18px}
+  .deck-hint{display:none}
+  #p-layers .text{margin-right:0}
+  .deck>.slide .handoff::after{text-wrap:balance;word-break:keep-all;line-break:strict}
+  .deck>.slide .key .nb{display:inline-block;text-wrap:balance}   /* phrases stay whole; a long phrase balances its own lines */
+  .deck>.slide .key .nb.w{text-wrap:wrap}   /* a phrase with a Latin word breaks before that word instead */
+  #p-you .key br{display:inline}   /* slide 9: the author's break between the two halves reads better than a reflow */
+  #p-layers .key{font-size:clamp(28px,8.4vw,40px)}   /* the id rule for desktop must not win on a phone */
+  /* slide 11 (the four quadrants) on a phone: the drawing is swapped for the same four quadrants as a 2x2 grid at full width (the sideways strip cut quadrants I and IV) */
+  .deck>.slide#p-matrix .vis svg{display:none}
+  .deck>.slide#p-matrix .vis{width:100%}
+  .deck>.slide#p-matrix .qm{display:grid;grid-template-columns:2em 1fr 1fr;grid-auto-rows:auto;gap:0;width:100%}
+  .qm b{font:400 14px/1.4 var(--mono);letter-spacing:.1em;color:#8f8f8f;display:flex;align-items:center;justify-content:center;padding:0 0 8px}
+  .qm b.r{padding:0;writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.3em}
+  .qm span{display:flex;align-items:center;min-height:112px;padding:12px 10px;border:1px solid #fff;margin:-1px 0 0 -1px;font-size:17px;line-height:1.4;font-weight:900;color:#fff;text-wrap:balance}
+  .qm span.on{background:#fff;color:#000}
+  /* slide 18 on a phone: the handoff pill sits above the cards, and the cards fade out above the footer instead of being cut by it */
+  .deck>.slide.tbl .steps{order:5}
+  .deck>.slide.tbl .sub{order:6}
+  .deck>.slide.tbl::after{content:"";position:fixed;left:0;right:0;bottom:40px;height:56px;background:linear-gradient(to top,#000,transparent);pointer-events:none;z-index:4}
+}
+
+/* round 3: slide 18 is read from a projector; thin grey 300 washes out */
+.slide .steps td{font-weight:400}
+.slide.tbl .sub{color:#b0b0b0}
+
+/* the phone variant of slide 11 (2x2 grid) is hidden everywhere else */
+.qm{display:none}
+
+/* round 7, slide 11 at 1280x720: the visible bounds of the drawing (the axis words on the left to the 重點 label on the right) sit left of the slide's centre, which left the right
+   side empty. Centre that block on the 1088px content frame and take up a little more of the width. CSS only: the geometry and the text of the drawing are unchanged. */
+.slide#p-matrix .vis svg{transform:translateX(46px) scale(1.08)}
+
+/* round 7: the footer link 「實作頁」 on a phone is a 44px-tall target; the footer keeps its height (the padding is taken back by the margin) */
+@media (orientation:portrait) and (max-width:700px){
+  .deck>.slide .slide-foot a{padding:13px 8px;margin:-13px -8px}
+}

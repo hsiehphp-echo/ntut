@@ -126,6 +126,43 @@
     }
     au.addEventListener('timeupdate', sync);
     au.addEventListener('seeked', sync);
+    /* our own control in the deck's idiom (play / pause, a seek line, the time); the native one stays if anything here fails */
+    try {
+      var NS = 'http://www.w3.org/2000/svg';
+      var pl = el('div', 'player'), pb = el('button', 'play'), sk = el('input', 'seek'), tm = el('span', 'time', '0:00'), sw = el('div', 'seekwrap');
+      pb.type = 'button';
+      pb.setAttribute('aria-label', '播放');
+      [['i-play', 'M6 3 L20 12 L6 21 Z'], ['i-pause', 'M5 3 H10 V21 H5 Z M14 3 H19 V21 H14 Z']].forEach(function (ic) {
+        var sv = d.createElementNS(NS, 'svg'), pa = d.createElementNS(NS, 'path');
+        sv.setAttribute('viewBox', '0 0 24 24'); sv.setAttribute('aria-hidden', 'true'); sv.setAttribute('class', ic[0]);
+        pa.setAttribute('d', ic[1]); sv.appendChild(pa); pb.appendChild(sv);
+      });
+      sk.type = 'range'; sk.min = '0'; sk.max = '1000'; sk.step = '1'; sk.value = '0';
+      sk.setAttribute('aria-label', '播放位置');
+      sw.appendChild(sk); sw.appendChild(tm);
+      pl.appendChild(pb); pl.appendChild(sw);
+      au.parentNode.insertBefore(pl, au);
+      au.removeAttribute('controls');
+      var fmt = function (x) { x = Math.max(0, Math.floor(x || 0)); return Math.floor(x / 60) + ':' + ('0' + (x % 60)).slice(-2); };
+      var paint = function () {
+        var dur = au.duration, ok = isFinite(dur) && dur > 0, v = ok ? Math.round(au.currentTime / dur * 1000) : 0;
+        sk.value = String(v); sk.style.setProperty('--p', (v / 10) + '%');
+        tm.textContent = fmt(au.currentTime) + (ok ? ' / ' + fmt(dur) : '');
+      };
+      pb.addEventListener('click', function () { if (au.paused) au.play(); else au.pause(); });
+      sk.addEventListener('input', function () { if (isFinite(au.duration)) { au.currentTime = sk.value / 1000 * au.duration; paint(); } });
+      ['play', 'pause', 'ended'].forEach(function (ev) {
+        au.addEventListener(ev, function () {
+          var on = !au.paused && !au.ended;
+          pl.classList.toggle('playing', on);
+          pb.setAttribute('aria-label', on ? '暫停' : '播放');
+        });
+      });
+      ['timeupdate', 'seeked', 'loadedmetadata', 'durationchange', 'ended'].forEach(function (ev) { au.addEventListener(ev, paint); });
+      /* keys and swipes on this control belong to it, not to the slide behind it */
+      ['keydown', 'touchstart', 'touchend'].forEach(function (ev) { pl.addEventListener(ev, function (e) { e.stopPropagation(); }, { passive: true }); });
+      paint();
+    } catch (e) {}
     ps.forEach(function (p, i) {
       p.addEventListener('click', function () { au.currentTime = ts[i]; au.play(); });
     });
@@ -168,7 +205,7 @@
       c.classList.add('active');
       c.removeAttribute('id');
       Array.prototype.forEach.call(c.querySelectorAll('[id]'), function (n) { n.removeAttribute('id'); });
-      Array.prototype.forEach.call(c.querySelectorAll('a,button'), function (n) { n.setAttribute('tabindex', '-1'); });
+      Array.prototype.forEach.call(c.querySelectorAll('a,button,input'), function (n) { n.setAttribute('tabindex', '-1'); });
       inner.appendChild(c);
       t.appendChild(inner);
       t.appendChild(el('span', 'num', String(i + 1)));
@@ -239,5 +276,11 @@
     }
   }, { passive: true });
   var swiped = 0;
+  /* a wide drawing that scrolls sideways (slide 11 on a phone) keeps its own swipe */
+  slides.forEach(function (s) {
+    var v = s.querySelector('.wide .vis') || (s.classList.contains('wide') ? s.querySelector('.vis') : null);
+    if (!v) return;
+    ['touchstart', 'touchend'].forEach(function (ev) { v.addEventListener(ev, function (e) { if (v.scrollWidth > v.clientWidth + 1) e.stopPropagation(); }, { passive: true }); });
+  });
   d.addEventListener('click', function (e) { if (Date.now() - swiped < 400) e.stopImmediatePropagation(); }, true);
 })();

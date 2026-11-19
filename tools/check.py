@@ -15,7 +15,7 @@
   G3 每一段字幕都還在    51 段字幕，每一段都能在 cleaned.md 裡找到
   G4 沒有摘要句          cleaned.md 沒有「講者提到」這一類第三人稱的摘要
   G5 補述沒有動到全文    notes/notes.md 拿掉補述之後，和 cleaned.md 一字不差
-  G6 補述都有標記        每一塊補述都標明是名詞補充（📖）或某個身份的視角（🎯）
+  G6 補述都有標記        每一塊補述都標明是名詞補充（📖）或立場筆記（🎯）
   G7 網頁和檔案同步      site/index.html 是腳本用現在的檔案產生的
   G8 你的理解            understanding.md 由學生親手寫
 """
@@ -87,15 +87,15 @@ class Ctx:
 def g0(cx):
     p = cx.root / "source" / "transcript.srt"
     if not p.is_file():
-        return False, "找不到 source/transcript.srt（來源字幕檔不見了，請從起始包還原）"
+        return False, "找不到 source/transcript.srt（來源字幕檔不見了：執行 git checkout source/transcript.srt 還原，或重新下載起始包）"
     # Windows 的 Git 可能把換行換成 \r\n；換行不算內容，所以先統一成 \n 再算指紋。
     if hashlib.sha1(p.read_bytes().replace(b"\r\n", b"\n")).hexdigest() != SOURCE_SHA1:
-        return False, "來源字幕檔被改動：source/transcript.srt（請還原，來源唯讀；要改錯字請改 data/corrections.json）"
+        return False, "來源字幕檔被改動：source/transcript.srt（請還原：執行 git checkout source/transcript.srt。來源唯讀；要改錯字請改 data/corrections.json）"
     return True, "來源字幕檔 source/transcript.srt 的指紋和寫死的基準一致，沒有被改過"
 
 
 def ref(name):
-    """載入 reference/ 裡講師的備援腳本，用來重做一次「標準答案」。"""
+    """載入 reference/ 裡老師的備援腳本，用來重做一次「標準答案」。"""
     import importlib.util
     p = ROOT_REF / f"{name}.py"
     spec = importlib.util.spec_from_file_location("ref_" + name, p)
@@ -123,7 +123,9 @@ def g1(cx):
     if have is None:
         if "data/cues.json" in cx.bad:
             return False, f"data/cues.json 不是合法 JSON：{cx.bad['data/cues.json']}（格式見 scripts_spec.md；請修正 tools/srt_strip.py 再重跑，不要手改 data/）"
-        return False, f"還沒做 S1：還沒有 data/cues.json（請先執行 {PY} tools/srt_strip.py 把字幕的時間軸拿掉）"
+        if not (cx.root / "tools" / "srt_strip.py").is_file():
+            return False, "還沒做 S1：還沒有 data/cues.json（tools/srt_strip.py 也還沒有：S1 請 AI 照 scripts_spec.md 寫出它，再執行它把字幕的時間軸拿掉）"
+        return False, f"還沒做 S1：還沒有 data/cues.json（請執行 {PY} tools/srt_strip.py 把字幕的時間軸拿掉）"
     want = ref("srt_strip").build(cx.root)["cues"]
     d = first_diff(have.get("cues") if isinstance(have, dict) else None, want, "data/cues.json")
     if d:
@@ -134,6 +136,8 @@ def g1(cx):
     if fixed is None:
         if "data/cues_fixed.json" in cx.bad:
             return False, f"data/cues_fixed.json 不是合法 JSON：{cx.bad['data/cues_fixed.json']}（格式見 scripts_spec.md；請修正 tools/fix_terms.py 再重跑，不要手改 data/）"
+        if not (cx.root / "tools" / "fix_terms.py").is_file():
+            return False, "時間軸拿掉了，還沒套校正用語：還沒有 data/cues_fixed.json（tools/fix_terms.py 也還沒有：請 AI 照 scripts_spec.md 寫出它，再執行它）"
         return False, f"時間軸拿掉了，還沒套校正用語：還沒有 data/cues_fixed.json（請執行 {PY} tools/fix_terms.py）"
     try:
         wantf, hits = ref("fix_terms").build(cx.root)
@@ -223,7 +227,7 @@ def g4(cx):
 def _notes(cx):
     t = cx.text("notes/notes.md")
     if t is None:
-        return None, "還沒有 notes/notes.md（S3b：請 AI 在全文旁邊加名詞補充與你的身份視角）"
+        return None, "還沒有 notes/notes.md（S3b：請 AI 在全文旁邊加名詞補充與立場筆記）"
     return t, ""
 
 
@@ -262,17 +266,17 @@ def g6(cx):
         if k == "🎯":
             m = re.search(r"\*\*(.+?)視角\*\*", b[0])
             if not m or not m.group(1).strip():
-                return False, f"視角區塊的第一行要寫成「🎯 **你的身份視角**」：「{show(b[0], 20)}」"
+                return False, f"立場筆記的第一行要寫成「🎯 **某某視角**」，某某是你的身份，例如「🎯 **資財系學生視角**」：「{show(b[0], 20)}」"
             who.add(m.group(1).strip())
         if len(b) < 2:
             return False, f"有一塊補述只有標題、沒有內容：「{show(b[0], 20)}」"
     if cnt["📖"] < MIN_TERM:
         return False, f"名詞補充（📖）只有 {cnt['📖']} 塊，至少要 {MIN_TERM} 塊"
     if cnt["🎯"] < MIN_VIEW:
-        return False, f"身份視角（🎯）只有 {cnt['🎯']} 塊，至少要 {MIN_VIEW} 塊"
+        return False, f"立場筆記（🎯）只有 {cnt['🎯']} 塊，至少要 {MIN_VIEW} 塊"
     if len(who) > 1:
-        return False, f"身份視角用了不只一個身份：{'、'.join(sorted(who))}（整份筆記用同一個身份）"
-    return True, f"{len(blocks)} 塊補述都有標記：名詞補充 {cnt['📖']} 塊、「{next(iter(who))}」視角 {cnt['🎯']} 塊"
+        return False, f"立場筆記用了不只一個身份：{'、'.join(sorted(who))}（整份筆記用同一個身份）"
+    return True, f"{len(blocks)} 塊補述都有標記：名詞補充 {cnt['📖']} 塊、立場筆記 {cnt['🎯']} 塊（身份：{next(iter(who))}）"
 
 
 def g7(cx):

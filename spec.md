@@ -13,14 +13,16 @@
 | 1 | 拿掉時間軸 | 腳本 `tools/srt_strip.py`（S1 請 AI 照 `scripts_spec.md` 寫） | `data/cues.json`、`data/raw.txt` | G0、G1 |
 | 2 | 校正專有名詞 | 人確認清單，腳本 `tools/fix_terms.py` 替換（S1 請 AI 寫） | `data/cues_fixed.json`、`data/fixed.txt` | G1 |
 | 3 | 把字幕變回一篇文章 | AI | `notes/cleaned.md` | G2、G3、G4 |
-| 4 | 名詞補充與立場筆記（身份視角） | AI | `notes/notes.md` | G5、G6 |
+| 4 | 名詞補充與立場筆記 | AI | `notes/notes.md` | G5、G6 |
 | 5 | 產生網頁 | 腳本 `tools/render.py` | `site/index.html` | G7 |
 | 6 | 寫下自己的理解 | 學生本人 | `understanding.md` | G8 |
+
+「留下的檔案」在你剛 `git clone` 下來的時候都還不存在（`notes/`、`site/` 資料夾也還沒有），做到那一步才會出現。步驟 1、2 的兩支腳本要在 S1 請 AI 照 `scripts_spec.md` 寫出來；步驟 6 的 `understanding.md` 要你自己親手寫。
 
 ## 三層分開
 
 - 講者的話：`source/` 唯讀；`notes/cleaned.md` 與 `notes/notes.md` 的正文只放講者的話。
-- AI 補述：只能寫在 `notes/notes.md` 裡以 `>` 開頭的補述區塊，網頁上用虛線框標示「AI 補述（非原文）」。
+- AI 補述：只能寫在 `notes/notes.md` 裡以 `>` 開頭的補述區塊，網頁上用虛線框標示「AI 補述（非原文）」，並註明是名詞補充或立場筆記。
 - 自己的理解：`understanding.md`，學生親手寫。
 
 ## 步驟 3 的規則：把字幕變回一篇文章（`notes/cleaned.md`）
@@ -41,7 +43,7 @@
 
 ## 步驟 4 的規則：名詞補充與立場筆記（`notes/notes.md`）
 
-立場筆記＝用學生指定的身份寫的視角區塊（🎯）。
+立場筆記＝用學生指定的身份寫的視角區塊（🎯）。第一行寫成 `🎯 **某某視角**`，「某某」就是學生的身份。
 
 `notes/notes.md` ＝ `notes/cleaned.md` 的全文原樣照抄，再在段落之間插入補述區塊。補述區塊每一行都以 `>` 開頭，區塊上下各空一行。兩種區塊：
 
@@ -55,7 +57,7 @@
 > - **連結**：和這個身份已經知道的哪個觀念有關。
 ```
 
-- 身份由學生指定（例如自己的科系），整份筆記用同一個身份。學生沒有指定身份時，先問，不要自己決定。
+- 身份由學生指定（例如自己的科系），整份筆記的立場筆記用同一個身份。學生沒有指定身份時，先問，不要自己決定。
 - G5：把補述區塊拿掉之後，正文要和 `notes/cleaned.md` 一字不差。
 - G6：每一塊補述的第一行以 📖 或 🎯 開頭；📖 至少 2 塊、🎯 至少 2 塊；🎯 的第一行寫成 `🎯 **某某視角**`。
 

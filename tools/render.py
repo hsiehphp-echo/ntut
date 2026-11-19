@@ -6,7 +6,7 @@
 
 網頁上三種人的話分開放：
   實線框　講者的話（原文，一個字都不改）
-  虛線框　AI 補述（非原文）：名詞補充、身份視角
+  虛線框　AI 補述（非原文）：名詞補充、立場筆記
   波浪線　你的理解（你親手寫的）
 """
 import argparse
@@ -74,7 +74,7 @@ def load(root, rel):
 
 def block_html(lines):
     head = lines[0]
-    kind = "名詞補充" if head.startswith("📖") else "身份視角" if head.startswith("🎯") else "補述"
+    kind = "名詞補充" if head.startswith("📖") else "立場筆記" if head.startswith("🎯") else "補述"
     out = [f'<aside class="add"><span class="tag">AI 補述（非原文）・{kind}</span>']
     items = []
     for ln in lines:
@@ -142,7 +142,7 @@ def render(root: Path) -> str:
         ("2", "校正專有名詞", "人確認，腳本替換", f"{src_n} 個字" if fixed else None),
         ("3", "把字幕變回一篇文章", "AI，腳本檢查字數",
          f"{sum(gsn.count(p) for p in gsn.body_paragraphs(cleaned))} 個字" if cleaned else None),
-        ("4", "名詞補充與身份視角", "AI，腳本檢查原文沒被動",
+        ("4", "名詞補充與立場筆記", "AI，腳本檢查原文沒被動",
          f"{len(gsn.quote_blocks(notes))} 塊補述" if notes else None),
         ("5", "我的理解", "你親手寫", "有" if mine else None),
     ]
@@ -158,7 +158,7 @@ def render(root: Path) -> str:
     elif raw:
         title, body = "字幕文字（剛拿掉時間軸，還沒校正）", cues_html(raw)
     else:
-        title, body = "還沒有內容", f'<p class="empty">請先跑 {PY} tools/srt_strip.py</p>'
+        title, body = "還沒有內容", f'<p class="empty">還沒有任何資料。S1 請 AI 照 scripts_spec.md 寫出 tools/srt_strip.py 並執行它，這一頁才會有字幕文字。</p>'
     if mine:
         paras = "".join(f"<p>{inline(p)}</p>" for p in mine.split("\n") if p.strip() and not p.startswith("#"))
         mine_html = f'<div class="mine">{paras}</div>'
