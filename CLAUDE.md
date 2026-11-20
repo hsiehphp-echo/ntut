@@ -33,7 +33,7 @@
 
 > **檔案什麼時候才有**：`git clone` 下來的時候，這個專案只有 `CLAUDE.md`（和另外三個指向它的檔案）、`README.md`、`prompts.md`、`spec.md`、`scripts_spec.md`、`source/`、`data/corrections.json`、`tools/`（check.py、render.py、plan_check.py、gsn.py、use_reference.py）、`reference/`、`slides/`。下面檔案地圖裡標「剛 clone 時沒有」的檔案，是做到那一步才會出現的，找不到不是弄丟了，不要去補寫、不要編造。
 >
-> **指令寫法**：本專案文件（`CLAUDE.md`、`spec.md`、`scripts_spec.md`、`prompts.md`）裡的 `python3 …` 是 macOS 的寫法。在 Windows 上請改用 `py …`；找不到 `py` 就用 `python …`；不要用 `python3`（Windows 上常會打開 Microsoft Store）。學生的終端機多半是 PowerShell 5.1：不支援 `&&`、`||`，指令要分開一行一行執行。
+> **指令寫法**：本專案文件（`CLAUDE.md`、`spec.md`、`scripts_spec.md`、`prompts.md`）裡的 `python3 …` 是 macOS 的寫法。在 Windows 上請改用 `py …`；找不到 `py` 就用 `python …`；不要用 `python3`（Windows 上常會打開 Microsoft Store）。學生在 Windows 上用的是命令提示字元（cmd），不是 PowerShell：給學生貼的指令請用 cmd 寫法（設 PATH 用 `set PATH=…;%PATH%`，路徑含空格用雙引號，不要用 `$env:`、`&` 呼叫運算子）。指令仍然一行一行分開執行。綠色版 Python 可能沒有 `py`，也可能不在 PATH，此時請學生用完整路徑 `"D:\…\python.exe"`。
 
 ## 檔案地圖
 
@@ -67,7 +67,7 @@
 7. 立場筆記裡「某某視角」的「某某」是學生的身份，由學生指定。學生沒說，就先問，不要自己挑一個。整份筆記用同一個身份。
 8. 名詞補充只寫你確定的內容。不確定的術語寫「這個詞我不確定，請你查證」，不要編。
 9. 不要替講者下結論。看不出來的就留給學生寫進「我還不懂」。
-10. 不要手改 `site/`，改完檔案後跑 `python3 tools/render.py`（Windows：`py tools/render.py`）。
+10. 不要手改 `site/`，改完檔案後跑 `python3 tools/render.py`（Windows：`py tools/render.py`，沒有 `py` 就用 `python`）。
 11. **`understanding.md` 只有學生本人親手寫。AI 絕不可以建立、撰寫、修改或補充它，也不可以想辦法讓 G8 變綠**（包括產生草稿、範本、換個檔名、改 `check.py`）。G8 紅燈不是你的工作：回報「G8 要等學生自己寫」就好。
 12. `data/cues.json`、`data/cues_fixed.json` 只能由腳本產生；G1 會用老師的版本重做一次、一段一段比對，手改一個字就會紅燈。G1 紅燈時修腳本，不要手改 `data/`。
 13. 寫 `tools/srt_strip.py`、`tools/fix_terms.py` 時：只照 `scripts_spec.md` 寫，只用 Python 標準函式庫，不要打開 `reference/`。最多修三次；三次後 G1 仍紅就停下來，告訴學生可以執行 `python3 tools/use_reference.py` 用備援往下做。不要自己去執行它。

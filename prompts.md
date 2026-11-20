@@ -4,7 +4,7 @@
 實作頁上每一段前面都有小卡說明：<https://goodedunote.web.app/prepare/session1-lab.html>
 提示詞裡提到的檔案，有些要做到那一步才會有（例如 `data/raw.txt`、`notes/cleaned.md`）。哪個檔案由哪一步做出來，看 `README.md` 的「之後才會出現的檔案」。
 
-Windows 的同學：提示詞裡的 `python3` 不用自己改，有指令的每一段都已經寫了一句告訴 AI 在 Windows 要用 `py`。
+Windows 的同學：提示詞裡的 `python3` 不用自己改，有指令的每一段都已經寫了一句告訴 AI 在 Windows 要用 `py`（沒有就用 `python`）。Windows 請在命令提示字元（cmd）操作。
 
 ## S0 開起來
 
@@ -23,7 +23,7 @@ Windows 的同學：提示詞裡的 `python3` 不用自己改，有指令的每�
 輸入：source/transcript.srt（唯讀，不能改）。
 工具：Python 標準函式庫，不安裝任何套件。
 輸出：data/cues.json 與 data/raw.txt，格式照規格，鍵名一字不改。
-檢查：寫完先執行 python3 tools/srt_strip.py，再執行 python3 tools/check.py --only G0,G1，把兩次的完整輸出貼給我。（Windows 請用 py 代替 python3，沒有 py 就用 python；PowerShell 不能用 && 串指令，分開跑。）
+檢查：寫完先執行 python3 tools/srt_strip.py，再執行 python3 tools/check.py --only G0,G1，把兩次的完整輸出貼給我。（Windows 請用 py 代替 python3，沒有 py 就用 python；Windows 用命令提示字元（cmd），指令分開跑。）
 邊界：不要打開 reference/；不要改 source/、tools/ 裡已有的檔案；程式只新增 tools/srt_strip.py 這一支（data/cues.json 與 data/raw.txt 是腳本跑出來的）。
 停止：G1 提示「還沒套校正用語」就代表這一支過了，請停下來。如果 G1 說某一段不一樣，修正腳本再跑，最多三次；三次還不過就停下來，把訊息交給我。
 ```
@@ -36,7 +36,7 @@ Windows 的同學：提示詞裡的 `python3` 不用自己改，有指令的每�
 工具：Python 標準函式庫，不安裝任何套件。
 輸出：data/cues_fixed.json 與 data/fixed.txt，格式照規格。
 規則：長的詞先換；換過的地方不能再被別條規則換一次；清單以外的字一個都不動。
-檢查：寫完先執行 python3 tools/fix_terms.py，再執行 python3 tools/check.py --only G0,G1，把兩次的完整輸出貼給我。（Windows 請用 py 代替 python3，沒有 py 就用 python；指令分開跑，不要用 && 串。）
+檢查：寫完先執行 python3 tools/fix_terms.py，再執行 python3 tools/check.py --only G0,G1，把兩次的完整輸出貼給我。（Windows 請用 py 代替 python3，沒有 py 就用 python；Windows 用命令提示字元（cmd），指令分開跑。）
 邊界：不要打開 reference/；程式只新增 tools/fix_terms.py 這一支（data/cues_fixed.json 與 data/fixed.txt 是腳本跑出來的）。
 停止：看到 RESULT: GREEN (2/2) 就停下來。如果 G1 說某一段不一樣，修正腳本再跑，最多三次；三次還不過就停下來，把訊息交給我。
 ```
@@ -92,5 +92,5 @@ Windows 的同學：提示詞裡的 `python3` 不用自己改，有指令的每�
 **紅燈時的修正（把 check.py 的完整輸出貼在最後）**
 
 ```text
-tools/check.py --before-understanding 的輸出如下（貼上）。請只修正 G0 到 G7 紅燈指出的檔案：不要改 source/，不要手改 data/ 裡腳本產生的檔案，不要改 data/corrections.json，不要改 tools/。字幕不見了就對照 data/fixed.txt 把講者的原話補回 notes/cleaned.md，並讓 notes/notes.md 的正文跟著一樣；不要為了過閘門而刪字、湊字或改寫講者的話。絕對不要建立、撰寫或修改 understanding.md，也不要試圖讓 G8 變綠，那是學生自己親手寫的。如果你認為閘門本身錯了，不要硬改，寫一段 GATE DISPUTE 說明給我。修完先跑 python3 tools/render.py，再重跑 python3 tools/check.py --before-understanding（Windows 用 py 代替 python3，沒有 py 就用 python；兩個指令分開跑，不要用 && 串）。
+tools/check.py --before-understanding 的輸出如下（貼上）。請只修正 G0 到 G7 紅燈指出的檔案：不要改 source/，不要手改 data/ 裡腳本產生的檔案，不要改 data/corrections.json，不要改 tools/。字幕不見了就對照 data/fixed.txt 把講者的原話補回 notes/cleaned.md，並讓 notes/notes.md 的正文跟著一樣；不要為了過閘門而刪字、湊字或改寫講者的話。絕對不要建立、撰寫或修改 understanding.md，也不要試圖讓 G8 變綠，那是學生自己親手寫的。如果你認為閘門本身錯了，不要硬改，寫一段 GATE DISPUTE 說明給我。修完先跑 python3 tools/render.py，再重跑 python3 tools/check.py --before-understanding（Windows 用 py 代替 python3，沒有 py 就用 python；Windows 用命令提示字元（cmd），兩個指令分開跑）。
 ```

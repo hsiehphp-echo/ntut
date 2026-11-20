@@ -17,14 +17,16 @@
    cd ntut
    ```
 
-2. 用 VS Code 打開 `ntut` 資料夾（檔案 → 開啟資料夾），再開一個終端機（終端機 → 新增終端機）。Windows 的終端機預設是 PowerShell：指令一行一行貼、一行一行跑，不要用 `&&` 把兩個指令串在一起。
+2. 用 VS Code 打開 `ntut` 資料夾（檔案 → 開啟資料夾），再開一個終端機（終端機 → 新增終端機）。Windows 請用「命令提示字元」（cmd）：提示字元長得像 `C:\Users\你\ntut>`，前面沒有 `PS`。如果前面有 `PS`，那是 PowerShell，請在終端機分頁旁的 ˅ 選「命令提示字元」，或按 Win+R 輸入 `cmd` 另外開一個，再 `cd` 到 `ntut` 資料夾。指令一行一行貼、一行一行跑。
 3. 看一次紅燈。現在什麼都還沒做，所以九道檢查只有一道是綠的，這是正確的起點：
 
    ```
    py tools/check.py
    ```
 
-   最後一行應該是 `RESULT: RED (1/9)`。如果 Windows 說找不到 `py`，就改成 `python tools/check.py`；不要打 `python3`，在 Windows 上它常會跳出 Microsoft Store。macOS 用 `python3 tools/check.py`。下面所有指令裡的 `python3`，Windows 都照這樣換成 `py`（或 `python`）。
+   最後一行應該是 `RESULT: RED (1/9)`。如果 Windows 說找不到 `py`，就改成 `python tools/check.py`；兩個都找不到，代表 Python 沒裝好，或是綠色版沒加進 PATH，見 `prepare.html`。不要打 `python3`，在 Windows 上它常會跳出 Microsoft Store。macOS 用 `python3 tools/check.py`。下面所有指令裡的 `python3`，Windows 都照這樣換成 `py`（或 `python`）。
+
+   綠色版 Python（例如放在 D: 槽、沒有 `py`）：在這個視窗先執行 `set PATH=D:\你的路徑;%PATH%`（路徑換成放 `python.exe` 的資料夾），再用 `python`。關掉視窗就失效，下次要重打；或直接用完整路徑：`"D:\你的路徑\python.exe" tools/check.py`。
 
 4. 在這個資料夾啟動你的 AI 工具（`claude`、`codex`、`agy` 或 `copilot`），貼上第一句話：
 
