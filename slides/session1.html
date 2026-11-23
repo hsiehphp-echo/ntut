@@ -14,6 +14,13 @@
 </head>
 <body>
 <main class="deck" data-lesson="1" data-title="第一堂">
+  <section class="slide meme" id="p-meme">
+    <figure class="vis"><img src="img/meme_not_what_i_wanted.webp" alt="四格漫畫。一：小孩拿著歪歪的火柴人全家福說「像這樣簡單就好！」。二：爸媽深夜架起畫架、拉透視線說「交給我們，保證專業！」。三：教室牆上都是蠟筆畫，只有主角的是金框寫實油畫，同學指著笑「笑死，這你阿祖畫的？」。四：小孩抱著油畫崩潰大喊「這不是我要的！」"></figure>
+    <div class="text">
+      <p class="no">先想一想</p>
+      <h2 class="key"><span class="nb"><span class="nb">你有沒有</span></span><br><span class="nb"><span class="nb">遇過這種事？</span></span></h2>
+    </div>
+  </section>
   <section class="slide vv" id="p-title">
     <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半是一個點，代表重點；右半是一條不中斷、來回折成四行的線，代表完整的原文">
         <path class="ln th" d="M250 40 V460"/>
@@ -28,11 +35,12 @@
     </div>
   </section>
   <section class="slide vv" id="p-tribute">
-    <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="白色方框裡寫著 VISUALIZE VALUE">
+    <figure class="vis"><a class="tribute" href="https://www.instagram.com/visualizevalue" target="_blank" rel="noopener" aria-label="Visualize Value 的 Instagram（另開新分頁）"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="白色方框裡寫著 VISUALIZE VALUE">
         <rect class="bx" x="70" y="70" width="360" height="360"/>
         <text x="250" y="238" font-size="44" text-anchor="middle" font-weight="900" letter-spacing="6">VISUALIZE</text>
         <text x="250" y="298" font-size="44" text-anchor="middle" font-weight="900" letter-spacing="6">VALUE</text>
-      </svg></figure>
+        <text class="go" x="408" y="106" font-size="22" text-anchor="middle" aria-hidden="true">↗</text>
+      </svg></a></figure>
     <div class="text">
       <h2 class="key"><span class="nb">致敬與緣起</span></h2>
       <p class="pair">JACK BUTCHER</p>
@@ -42,6 +50,20 @@
         <dt>2026.10</dt><dd>說話與聽話</dd>
         <dt>2026.11</dt><dd>今天，帶進你的電腦</dd>
       </dl>
+    </div>
+  </section>
+  <section class="slide proof duo" id="p-learnai">
+    <p class="no">先看兩份研究</p>
+    <h2 class="key"><span class="nb">作業變好了，</span><br><span class="nb">真正懂的卻變少了</span></h2>
+    <div class="row">
+      <figure>
+        <img src="img/cs329z_ai_exam.webp" alt="兩組分數分布圖：上面是作業分數，用 AI 之後整體往右移到 100 以上；下面是考試分數，用 AI 之後反而往左拖出一條尾巴">
+        <figcaption>用 AI，作業分數變高，<br>考試分數卻往下掉</figcaption>
+      </figure>
+      <figure>
+        <img src="img/cs329z_ai_mastery.webp" alt="Anthropic 研究的兩張誤差棒圖：用 AI 完成任務的時間略短但差異不顯著（p = 0.391）；理解測驗分數明顯較低（p = 0.010）">
+        <figcaption>用 AI，寫得快一點（差異不顯著），<br>理解測驗卻明顯較低<br><span class="src">來源：Strömberg 等 2026 預印本；Anthropic 研究</span></figcaption>
+      </figure>
     </div>
   </section>
   <section class="slide listen" id="p-listen">
@@ -119,6 +141,21 @@
       
     </div>
   </section>
+  <section class="slide proof solo" id="p-nexttoken">
+    <p class="no">一問一答的原理</p>
+    <h2 class="key"><span class="nb w">AI 不是去查答案，</span><br><span class="nb">而是接著你給的文字往下寫</span></h2>
+    <div class="row">
+      <figure>
+        <img src="img/cs329z_llm_fewshot.webp" alt="左邊是 Transformer 的架構圖；右邊是 GPT-3 的 few-shot 示範：先寫任務說明「把英文翻成法文」，再給三個例子，最後一行只寫 cheese =>，模型就照樣接下去">
+        
+      </figure>
+      <div class="side">
+        <p class="desc">給它說明和幾個例子，<br>它就照樣接下去。</p>
+        <p class="desc"><strong>原文給得越完整，<br>接得越準。</strong></p>
+        <p class="src">圖：Transformer 與 GPT-3 的 few-shot 示範，Stanford CS329Z 第 1 講</p>
+      </div>
+    </div>
+  </section>
   <section class="slide vv" id="p-retention">
     <figure class="vis"><svg viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="左半「速讀」的曲線衝高後掉回零；右半「留存」的曲線上升後停在高處">
         <path class="ln th" d="M250 40 V460"/>
@@ -133,6 +170,20 @@
       <p class="desc">真正的效率不是讀得快，<br>而是忘得慢。</p>
       
       
+    </div>
+  </section>
+  <section class="slide proof duo" id="p-agent">
+    <p class="no">什麼是 Agent</p>
+    <h2 class="key"><span class="nb">Agent：</span><span class="nb w">LLM 加上規劃、</span><span class="nb">記憶、</span><span class="nb">工具，</span><br><span class="nb">在環境裡觀察、</span><span class="nb">行動</span></h2>
+    <div class="row">
+      <figure>
+        <img src="img/cs329z_agent_defs.webp" alt="兩種 Agent 的定義圖：左邊 Lilian Weng 的圖，Agent 連到 Tools、Memory、Planning、Action；右邊 CoALA 的圖，記憶、推理與 LLM 在框內，透過觀察與行動和外面的世界來回">
+        <figcaption>不同研究者的畫法，<br>指向同一個架構</figcaption>
+      </figure>
+      <figure>
+        <img src="img/cs329z_agent_parts.webp" alt="Agent 的關鍵組成：LLM Core 上面是 Planning &amp; Reasoning（紅框）與 Memory，下面是 Tools 與 Agent actions，右邊是環境（桌面、瀏覽器、資料庫），以 observe 和 act 連起來">
+        <figcaption>紅框「規劃與推理」：把任務拆開，<br>今天親手做的就是這一塊<br><span class="src">來源：Lilian Weng 2023；Sumers &amp; Yao 2024；Stanford CS329Z</span></figcaption>
+      </figure>
     </div>
   </section>
   <section class="slide vv op" id="p-you">

@@ -60,7 +60,19 @@ body.show-notes .slide.active .notes{background:#111;color:#cfcfcf;border-top:1p
 .slide.proof figure{margin:0;display:flex;flex-direction:column;gap:12px;min-height:0}
 .slide.proof figure img{display:block;width:100%;height:392px;object-fit:contain;object-position:left top;background:#fff}
 .slide.proof figcaption{font-size:22px;line-height:1.45;color:#cfcfcf}
+/* evidence, 16:9 source slides: duo = two side by side, solo = one large picture with a short statement beside it */
+.slide.proof.duo .row{grid-template-columns:1fr 1fr;gap:32px}
+.slide.proof.duo figure img,.slide.proof.solo figure img{height:auto;aspect-ratio:16/9;object-position:center}
+.slide.proof.solo .row{grid-template-columns:640px 1fr;gap:44px;align-items:start}
+.slide.proof.solo .side{display:flex;flex-direction:column;gap:22px}
+.slide.proof.solo .desc{font-size:28px}
 
+/* meme: one large comic on the left, one question on the right (opening icebreaker) */
+.slide.meme{flex-direction:row;align-items:center;gap:48px;padding:48px 64px 88px}
+.slide.meme .vis{flex:0 0 840px;margin:0}
+.slide.meme .vis img{display:block;width:100%;height:auto;background:#fff}
+.slide.meme .text{display:flex;flex-direction:column;gap:22px}
+.slide.meme .key{font-size:44px;white-space:nowrap}
 /* three columns: tool / AI / person */
 .slide .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .slide .trio>div{padding:26px 32px 28px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
@@ -170,7 +182,8 @@ body.show-hint .deck-hint{opacity:1}
 /* spec D8: phone in portrait reflows to one readable column (landscape and desktop are untouched) */
 @media (orientation:portrait) and (max-width:700px){
   .deck>.slide{left:0;top:0;width:100vw;height:100svh;transform:none;flex-direction:column;justify-content:safe center;align-items:flex-start;gap:20px;padding:48px 24px 76px;overflow-y:auto;text-align:left}
-  .deck>.slide.vv,.deck>.slide.listen{flex-direction:column;align-items:flex-start}
+  .deck>.slide.vv,.deck>.slide.listen,.deck>.slide.meme{flex-direction:column;align-items:flex-start}
+  .deck>.slide.meme .vis{width:100%;aspect-ratio:auto}
   .deck>.slide .vis,.deck>.slide.title .vis{position:static;flex:0 0 auto;width:min(64vw,260px);height:auto;aspect-ratio:1;margin:0}
   .deck>.slide.wide .vis,.deck>.slide.proof .vis{width:100%;aspect-ratio:auto}
   .deck>.slide .key,.deck>.slide.vv .key,.deck>.slide.vv h1.key,.deck>.slide.say .key,.deck>.slide.title .key,.deck>.slide.listen .key,.deck>.slide.tbl .key,.deck>.slide.vv.op .key,.deck>.slide.title h1.key{font-size:clamp(28px,8.4vw,40px);max-width:none}
@@ -179,6 +192,8 @@ body.show-hint .deck-hint{opacity:1}
   .deck>.slide .how dd{font-size:16px}
   .deck>.slide .handoff{font-size:18px;padding:12px 24px;align-self:flex-start}
   .deck>.slide .trio,.deck>.slide .three{grid-template-columns:1fr}
+  .deck>.slide.proof.duo .row,.deck>.slide.proof.solo .row{grid-template-columns:1fr;flex:0 0 auto;gap:28px}
+  .deck>.slide.proof.duo figure,.deck>.slide.proof.solo figure{min-height:auto}
   .deck>.slide .steps{font-size:14px;table-layout:auto;width:100%}
   .deck>.slide .steps td.t,.deck>.slide .steps td.s{font-size:14px}
   .deck>.slide .steps th{width:auto!important;font-size:12px}
@@ -248,3 +263,12 @@ body.show-hint .deck-hint{opacity:1}
 @media (orientation:portrait) and (max-width:700px){
   .deck>.slide .slide-foot a{padding:13px 8px;margin:-13px -8px}
 }
+
+/* tribute slide: the VISUALIZE VALUE frame is a link; on hover/focus the frame inverts */
+.vis a.tribute{display:block;cursor:pointer;color:inherit;text-decoration:none}
+.vis a.tribute svg .bx,.vis a.tribute svg text{transition:fill .25s ease}
+.vis a.tribute svg .go{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,"Noto Sans TC",monospace;font-weight:400;fill:#8f8f8f}
+.vis a.tribute:hover svg .bx,.vis a.tribute:focus-visible svg .bx{fill:#fff}
+.vis a.tribute:hover svg text:not(.go),.vis a.tribute:focus-visible svg text:not(.go){fill:#000}
+.vis a.tribute:hover svg .go,.vis a.tribute:focus-visible svg .go{fill:#000}
+@media (prefers-reduced-motion:reduce){.vis a.tribute svg .bx,.vis a.tribute svg text{transition:none}}
