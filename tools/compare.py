@@ -130,7 +130,7 @@ def main(argv):
         a, b = text.index(START) + len(START), text.index(END)
         with open(path, "w", encoding="utf-8", newline="\n") as f:
             f.write(text[:a] + "\n" + "\n".join(table) + "\n" + text[b:])
-        print("\n（已更新 eval.md 的表；你寫的字沒有動。花多少只有工具自己知道：訂閱的人看不到金額。Claude Code：每一段開始前、做完各打一次 /usage，把「Current session」的 % 相減，寫進 eval.md；其他工具：那一行照 eval.md 上面寫的做。）")
+        print("\n（已更新 eval.md 的表；你寫的字沒有動。花多少只有工具自己知道：訂閱的人看不到金額。Claude Code：開新對話前、做完各打一次 /usage，把「Current session」的 % 相減，寫進 eval.md 的「b 花了多少」那一行；其他工具：那一行照 eval.md 上面寫的做。）")
     else:
         print("\neval.md 裡找不到表的位置（%s 與 %s），所以沒有更新。" % (START, END))
     return 0
