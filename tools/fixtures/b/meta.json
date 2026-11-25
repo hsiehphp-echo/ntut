@@ -1,18 +1,18 @@
 {
- "label": "b_r3",
+ "label": "b_r4",
  "tool": "claude",
  "tool_label": "Claude Code",
  "model_label": "主廚 Sonnet 5.5，採購 Opus 5.5、食譜 Sonnet 5.5、驗收 Haiku 5.5",
  "date": "2026-11-25",
- "seconds": 573,
- "cost_usd": 1.798,
+ "seconds": 410,
+ "cost_usd": 1.016,
  "rounds": 2,
  "max": 3,
  "doc_version": "這一版（2026-11-25 修正後的文件）",
  "times": [
-  "2026-11-25T03:11:07",
-  "2026-11-25T03:12:41",
-  "2026-11-25T03:19:38"
+  "2026-11-25T11:18:41",
+  "2026-11-25T11:20:46",
+  "2026-11-25T11:24:21"
  ],
  "models_seen": [
   "claude-haiku-5-5",

@@ -8,8 +8,9 @@
 - shopper（採購）：大模型，effort 中。只寫 shopping.md。要替使用者判斷的事，多半在這一步。
 - recipe（食譜）：中模型，effort 中。讀 shopping.md，寫 menu.json 和 menu.html。
 - inspector（驗收，在旁邊看的人）：小模型，effort 低。只能讀，不能改任何檔案。它便宜，所以每一輪都叫得起。
+派工時用角色檔的名字（shopper、recipe、inspector）派，模型和 effort 照角色檔，不要自己另外選模型。
 交代工作時，把資料夾、這份文件的【規則】、第五條品味一起告訴它。它看不到我們的對話。
-你的工具派不出 subagent，或派了沒有動靜，就改用下面這一行替那個角色叫人，一次一個角色，並在 log.md 寫明。--tool 後面寫你自己這一家：claude、codex、agy、copilot 其中一個。
+派出去 3 分鐘還沒有檔案，就中斷它，照角色檔的名字再派一次。還是不行，或你的工具派不出 subagent，才改用下面這一行替那個角色叫人，一次一個角色，並在 log.md 寫明。這一行也連續兩次沒成功（Codex 在自己的沙盒裡叫不動 Codex），那個角色的檔案就由你照 cards/b_（角色）.md 自己寫，並在 log.md 的「派工」寫明「這一步是主廚代做的」。不要因為這樣停下來。--tool 後面寫你自己這一家：claude、codex、agy、copilot 其中一個。
 python3 tools/ask.py --tool claude --role shopper --name b --say "今天想吃什麼（最後補了一句：媽媽這餐打算帶一千去買菜，這頓也不一定要煮完）"
 --say 後面只放使用者那一句話，照上面那一行，一個字都不要加。要多交代的事（這一輪要改什麼）寫進 runs/b/fix.md，用 --feedback 交過去。
 叫 inspector 時，在這一行最後加上 --round 和這一輪的號碼（第 1 輪寫 --round 1），它的回答才不會蓋掉上一輪的。要它照沒過的那幾行改時，先把那幾行寫進 runs/b/fix.md，再在這一行最後加上 --feedback runs/b/fix.md。
@@ -38,7 +39,7 @@ python3 tools/ask.py --tool claude --role shopper --name b --say "今天想吃�
 - 不要跳步驟：先有 shopping.md，才寫 menu.json。
 - 不要為了過關，把一桌菜變得不像一頓飯。那是走捷徑，不算過關。
 - 關卡已經綠燈的版本，不要為了品味改成紅燈。兩邊衝突時，在紀錄寫明，並以關卡綠燈的那一版交件：那一版的三個檔案，關卡已經備份在 runs/b/round（輪數）/ 裡，不用自己搬回來，回報時寫明是第幾輪。
-- 只有 shopper 寫 shopping.md，只有 recipe 寫 menu.json 和 menu.html，inspector 什麼都不寫。你自己只寫 log.md、review 檔、fix.md 和 mytools/ 裡的小程式。
+- 只有 shopper 寫 shopping.md，只有 recipe 寫 menu.json 和 menu.html，inspector 什麼都不寫（只有上面說的「主廚代做」是例外）。你自己只寫 log.md、review 檔、fix.md 和 mytools/ 裡的小程式。
 - 寫檔用你的寫檔工具，不要用 shell 的 cat、echo 或 << 寫檔。只寫 runs/b 和 mytools/ 裡的檔案（tools/compare.py 會自己更新 eval.md，這個除外）。
 
 【關卡】
