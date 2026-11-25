@@ -11,6 +11,7 @@
 交代工作時，把資料夾、這份文件的【規則】、第五條品味一起告訴它。它看不到我們的對話。
 你的工具派不出 subagent，或派了沒有動靜，就改用下面這一行替那個角色叫人，一次一個角色，並在 log.md 寫明。--tool 後面寫你自己這一家：claude、codex、agy、copilot 其中一個。
 python3 tools/ask.py --tool claude --role shopper --name b --say "今天想吃什麼（最後補了一句：媽媽這餐打算帶一千去買菜，這頓也不一定要煮完）"
+--say 後面只放使用者那一句話，照上面那一行，一個字都不要加。要多交代的事（這一輪要改什麼）寫進 runs/b/fix.md，用 --feedback 交過去。
 叫 inspector 時，在這一行最後加上 --round 和這一輪的號碼（第 1 輪寫 --round 1），它的回答才不會蓋掉上一輪的。要它照沒過的那幾行改時，先把那幾行寫進 runs/b/fix.md，再在這一行最後加上 --feedback runs/b/fix.md。
 
 【品質標準與品味】
