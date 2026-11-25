@@ -33,6 +33,8 @@
       "PowerShell(py -I mytools/*)",
       "WebSearch",
       "WebFetch",
+      "Edit(./runs/**)",
+      "Edit(./mytools/**)",
       "Bash(python3 tools/switch_lesson.py *)",
       "Bash(python tools/switch_lesson.py *)",
       "Bash(py tools/switch_lesson.py *)",
