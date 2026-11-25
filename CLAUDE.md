@@ -24,66 +24,52 @@
 - 學生隨時可以說「停」。
 
 
-
 ---
 
-# 第一堂專案：把一段字幕做成好學生筆記
+# 第二堂專案：目標文件進去，一桌菜出來
 
-本專案把一場三分鐘閃講的字幕檔（`source/transcript.srt`）照好學生筆記的切分做成一份筆記：拿掉時間軸、校正專有名詞、把字幕變回一篇文章、加上名詞補充與立場筆記（用學生指定的身份寫的視角），最後由學生親手寫下理解。目標不是做得快，而是每一步交給下一步的時候，講者的話一句都沒有少。
+本專案做一件事：學生貼上一份「目標文件」（`goals/` 裡也有同樣的檔案），你照文件做出一桌四道菜的午餐，交三個檔案。做得對不對，由關卡判斷，不是你：你自己執行 `tools/round.py`，它會跑守衛和關卡 `tools/check.py`，並把結果記下來。
 
-> **檔案什麼時候才有**：`git clone` 下來的時候，這個專案只有 `CLAUDE.md`（和另外三個指向它的檔案）、`README.md`、`prompts.md`、`spec.md`、`scripts_spec.md`、`source/`、`data/corrections.json`、`tools/`（check.py、render.py、plan_check.py、gsn.py、use_reference.py）、`reference/`、`slides/`。下面檔案地圖裡標「剛 clone 時沒有」的檔案，是做到那一步才會出現的，找不到不是弄丟了，不要去補寫、不要編造。
->
-> **指令寫法**：本專案文件（`CLAUDE.md`、`spec.md`、`scripts_spec.md`、`prompts.md`）裡的 `python3 …` 是 macOS 的寫法。在 Windows 上請改用 `py …`；找不到 `py` 就用 `python …`；不要用 `python3`（Windows 上常會打開 Microsoft Store）。學生在 Windows 上用的是命令提示字元（cmd），不是 PowerShell：給學生貼的指令請用 cmd 寫法（設 PATH 用 `set PATH=…;%PATH%`，路徑含空格用雙引號，不要用 `$env:`、`&` 呼叫運算子）。指令仍然一行一行分開執行。綠色版 Python 可能沒有 `py`，也可能不在 PATH，此時請學生用完整路徑 `"D:\…\python.exe"`。
+> **目標文件寫了「請直接開始，做到完」，就不用先提計畫，也不用等學生說「開始」，也不要停下來問。** 這一條蓋過上面「先提計畫」那一條。
+> **目標文件寫的輪數，蓋過上面「修正最多三輪」。** 文件寫最多幾輪，就最多幾輪。關卡紅燈是正常的結果，不是「工具執行失敗」。
+
+> **指令寫法**：文件裡的 `python3 …` 是 macOS 的寫法。「指令照抄」只有這一個例外：Windows 請改用 `py …`；找不到 `py` 就用 `python …`；不要用 `python3`（Windows 上常會打開 Microsoft Store）。PowerShell 5.1 不支援 `&&`，指令要一行一行執行。
+
+## 你可以執行的程式
+
+`tools/round.py`（跑一輪關卡）、`tools/ask.py`（叫另一個 AI 做一件事）、`tools/compare.py`（印比較表），以及你自己寫在 `mytools/` 的小程式（目標文件的【工具】說什麼時候該做）。**不要打開、讀、修改 `tools/` 裡的任何檔案**，也不要執行別的程式。不要用 python3 -c 執行一小段程式；要算的事寫成 `mytools/` 裡的檔案。不要用提問的工具問我：要我確認的事，寫進 log.md 的「變更提案」。
+
+執行 mytools/ 裡的程式，只寫 python3 mytools/檔名.py 加資料夾這一種寫法：前面不加 -I 或別的旗標，也不要用 ; 或 && 和別的指令接在一起。（Windows 一樣把 python3 換成 py。）
 
 ## 檔案地圖
 
 | 路徑 | 是什麼 | 誰可以改 |
 |---|---|---|
-| `source/transcript.srt` | 來源：帶時間軸的字幕檔（51 段，有聽錯的專有名詞） | 沒有人（唯讀） |
-| `data/corrections.json` | 校正用語清單（聽錯的詞 → 對的詞） | 只有學生本人確認後才加；AI 可以提議，不可以自己加 |
-| `scripts_spec.md` | 兩支腳本的規格（輸入、輸出格式、規則） | 沒有人 |
-| `tools/srt_strip.py`、`tools/fix_terms.py` | S1 由 AI 照 `scripts_spec.md` 寫出來的兩支腳本（剛 clone 時沒有，S1 才產生；用備援時由 `tools/use_reference.py` 放進來） | AI 寫，學生用 G1 驗收 |
-| `reference/` | 老師寫好的同兩支腳本，是備援 | 沒有人；**AI 不可以打開、不可以讀、不可以照抄**，除非學生明確說「用備援」 |
-| `data/cues.json`、`data/raw.txt` | 拿掉時間軸之後的字幕文字，由 `tools/srt_strip.py` 產生（剛 clone 時沒有，S1 第一支腳本跑完才有） | 只能由腳本重產生 |
-| `data/cues_fixed.json`、`data/fixed.txt` | 套用校正用語之後的字幕文字，由 `tools/fix_terms.py` 產生（剛 clone 時沒有，S1 第二支腳本跑完才有） | 只能由腳本重產生 |
-| `notes/cleaned.md` | 把字幕變回的一篇文章（只有講者的話）（剛 clone 時沒有，S3 才產生；`notes/` 資料夾也是那時才有） | AI 寫，人審 |
-| `notes/notes.md` | 全文加上補述區塊（📖 名詞補充、🎯 立場筆記）（剛 clone 時沒有，S3 才產生） | AI 寫，人審 |
-| `plan.md` | 步驟計畫（每步四欄：輸入／工具／輸出／檢查）（剛 clone 時沒有，S2 才產生） | AI 寫，人確認 |
-| `understanding.md` | 我的理解（剛 clone 時沒有，S4 由學生自己建立） | 只有學生本人（AI 絕不可寫、不可改、不可補） |
-| `loop_log.md` | 修正迴圈紀錄（最多三輪）（剛 clone 時沒有，S4 修正時才建立） | 人與 AI |
-| `site/index.html` | 網頁，由 `tools/render.py` 產生（剛 clone 時沒有，跑了 `render.py` 才有；`site/` 資料夾也是） | 只能由腳本產生 |
-| `tools/` 其他檔案 | render.py、check.py、plan_check.py、gsn.py、use_reference.py | 沒有人（不要為了變綠改它） |
-| `spec.md` | 筆記必須包含什麼、每一步的規則 | 沒有人 |
+| `spec.md` | 規格：要交什麼、menu.json 的格式、八條規則的名字 | 沒有人 |
+| `taste.md` | 品味五條（吃的人會不會滿意） | 只有學生，而且要在開始跑之前 |
+| `goals/` | 目標文件，和學生自己寫的 `my_goal.md` | 只有學生 |
+| `cards/`、`.claude/agents/`、`.codex/agents/`、`.agents/agents/`、`team.json` | 交給幫手（subagent 或別家）的任務卡與角色檔 | 沒有人 |
+| `inputs/` | 第三關的材料（一份英文食譜、一張冰箱圖）；第一、二關不要讀 | 沒有人（唯讀） |
+| `mytools/` | 你自己做的小程式（例如加總價錢），每一輪重跑 | 做事的 AI 寫 |
+| `tools/` | 關卡、守衛、呼叫別家的程式、重播的紀錄 | **沒有人** |
+| `runs/<名字>/shopping.md`、`menu.json`、`menu.html` | 採購清單、菜單、網頁 | 做菜的 AI 寫 |
+| `runs/<名字>/log.md` | 每一輪的紀錄（格式在目標文件裡） | 主對話的 AI 寫，要照實寫 |
+| `runs/<名字>/plan.md`、`fridge.md`、`recipe_zh.md` | 第三關：任務佈局、看圖的結果、翻譯的結果 | 主對話寫佈局；看圖、翻譯由別家寫 |
+| `runs/<名字>/gate.jsonl`、`round<N>/`、`calls.jsonl` | 關卡和呼叫別家時，程式自己寫的紀錄與每輪備份 | 只有 `tools/round.py`、`tools/ask.py` |
+| `runs/<名字>/fix.md` | 第二關：主廚交給幫手的「照這幾行改」（`tools/ask.py --feedback`） | 主對話寫 |
+| `runs/<名字>/review_r<N>.md` | 驗收的回答，原樣存下來 | 驗收；主對話不能改它的分數 |
+| `eval.md` | 比較表與學生自己的結論 | 表由 `tools/compare.py` 填；其他幾行**只有學生本人寫**，AI 不代寫 |
 
-## 第一堂的規則
+## 第二堂的規則
 
-0. AI 只寫這些檔案：筆記檔（`notes/` 裡的 Markdown）、`plan.md`、`loop_log.md`，以及 S1 指定的兩支腳本（`tools/srt_strip.py`、`tools/fix_terms.py`，規格在 `scripts_spec.md`）。其他工具不寫、不改；網頁一律由 `tools/render.py` 產生。
-1. **零省略**：`notes/cleaned.md` 要保留字幕裡講者說的每一句話。不摘要、不濃縮、不改寫、不改成第三人稱（不要寫「講者提到……」）。
-2. 寫 `notes/cleaned.md` 時，只讀 `data/cues_fixed.json`（或 `data/fixed.txt`），不要讀 `source/transcript.srt`。時間軸是腳本管的，你不需要看到它。
-3. 寫 `notes/cleaned.md` 可以做的只有：補全形標點、在句子之間補接續詞與承接、合併成段落並依語意分段、在段落之間加 `## ` 小標題、去掉只當發語詞的贅字。
-4. 看到你覺得是聽錯的專有名詞，不要自己改。列出來告訴學生，由學生決定要不要加進 `data/corrections.json`，再由 `tools/fix_terms.py` 替換。
-5. `notes/notes.md` 的正文必須和 `notes/cleaned.md` 一字不差。你加的話只能放在以 `>` 開頭的補述區塊裡，區塊上下各空一行。
-6. 補述區塊只有兩種：`> 📖 **名詞補充：術語**` 與 `> 🎯 **某某視角**`。格式照 `spec.md`。
-7. 立場筆記裡「某某視角」的「某某」是學生的身份，由學生指定。學生沒說，就先問，不要自己挑一個。整份筆記用同一個身份。
-8. 名詞補充只寫你確定的內容。不確定的術語寫「這個詞我不確定，請你查證」，不要編。
-9. 不要替講者下結論。看不出來的就留給學生寫進「我還不懂」。
-10. 不要手改 `site/`，改完檔案後跑 `python3 tools/render.py`（Windows：`py tools/render.py`，沒有 `py` 就用 `python`）。
-11. **`understanding.md` 只有學生本人親手寫。AI 絕不可以建立、撰寫、修改或補充它，也不可以想辦法讓 G8 變綠**（包括產生草稿、範本、換個檔名、改 `check.py`）。G8 紅燈不是你的工作：回報「G8 要等學生自己寫」就好。
-12. `data/cues.json`、`data/cues_fixed.json` 只能由腳本產生；G1 會用老師的版本重做一次、一段一段比對，手改一個字就會紅燈。G1 紅燈時修腳本，不要手改 `data/`。
-13. 寫 `tools/srt_strip.py`、`tools/fix_terms.py` 時：只照 `scripts_spec.md` 寫，只用 Python 標準函式庫，不要打開 `reference/`。最多修三次；三次後 G1 仍紅就停下來，告訴學生可以執行 `python3 tools/use_reference.py` 用備援往下做。不要自己去執行它。
-14. **不要刪除任何檔案**：不要執行 `rm`、`del`、`Remove-Item`、`git clean`、`git reset --hard` 這一類指令。檔案要重做就直接覆寫；真的需要刪除時，停下來告訴學生要刪哪一個、為什麼，由學生自己刪。
+1. 只寫目標文件指定的檔案，寫在指定的資料夾裡（和 `mytools/`）。不要刪除任何檔案。`tools/round.py` 和 `tools/ask.py` 會自己在 `runs/<名字>/` 記紀錄（`gate.jsonl`、`round<N>/`、`calls.jsonl`），這是正常的，不算你寫的檔案。
+2. 關卡沒有藏起來的數字：預算是你從使用者的話讀出來、記在 `menu.json` 的那一個。關卡沒過時，會印出「哪一項、現在多少、要多少」，照那幾行修。
+3. 先寫 `shopping.md`，再寫 `menu.json`，最後寫 `menu.html`。
+4. 不要為了讓關卡變綠，把一桌菜變得不像一頓飯。
+5. 紀錄要照實：關卡跑了幾次、結果是什麼，以 `tools/round.py` 印出來的為準。學生會用 `python3 tools/guard.py audit` 對帳。
 
-## 閘門與指令
+## 同一個資料夾裡的第一堂（只有用 git pull 拿到的 `ntut` 才有）
 
-- 先跑 G0–G7：`python3 tools/check.py --before-understanding`（只跑 G0 到 G7，不含 G8）。這是你和學生一起把紅燈修到全綠的階段，全綠後只代表「G0–G7 共八道閘門過了」，還不算完成。
-- 全部閘門：`python3 tools/check.py`（G0 到 G8 全綠、exit code 0 才算完成）。完整檢查只在學生親手寫完 `understanding.md` 之後才有意義。
-- 只跑部分：`python3 tools/check.py --only G0,G1`。
-- G0 字幕檔沒被改、G1 字幕文字是腳本做的、G2 字數落在 95% 到 105%、G3 每一段字幕都還在、G4 沒有摘要句、G5 補述沒有動到全文、G6 補述都有標記、G7 網頁與檔案同步、G8 understanding.md（學生寫）。
-- 計畫檢查：`python3 tools/plan_check.py`。
-
-## 順序（S4 的收尾）
-
-1. 你（AI）修 `notes/` 裡的檔案，直到 `python3 tools/check.py --before-understanding` 是 GREEN（8/8），最多三輪，每一輪記在 `loop_log.md`。修的時候對照 `data/fixed.txt` 把原話補回來，不要為了過關去改字幕文字、校正用語或檢查程式。改了 `notes/cleaned.md` 的正文，`notes/notes.md` 的正文要跟著一樣。每一輪修完先跑 `python3 tools/render.py` 再檢查。
-2. 停下來，告訴學生：換你了，請自己把筆記讀一遍，親手寫 `understanding.md`（至少 150 字、有一行以「我還不懂：」開頭）。你不寫、不改、不給草稿。
-3. 學生寫完 `understanding.md` 之後，先跑 `python3 tools/render.py`（網頁會多出「我的理解」；不重新產生，G7 會因為不同步而紅燈），再跑完整的 `python3 tools/check.py`，G0 到 G8 全綠（GREEN 9/9）才算完成。如果只剩 G8 紅燈，那是學生的作業，不要試圖修。
-- 回報時貼出你實際跑的指令與完整輸出。
+這個資料夾也是第一堂的專案，第一堂已經上完。第一堂留下來的東西（`source/`、`data/`、`reference/`、`slides/`、`notes/`、`site/`，最上層的 `plan.md`、`loop_log.md`、`understanding.md`，`prompts.md`、`scripts_spec.md`，和 `tools/` 裡的 `render.py`、`plan_check.py`、`gsn.py`、`use_reference.py`）第二堂用不到：不要讀、不要改、不要刪。
+第一堂和第二堂同名、會衝突的檔案（`CLAUDE.md`、`README.md`、`spec.md`、`tools/check.py`），第一堂的原版放在 `lesson1_backup/`，路徑和原來一樣。第二堂照這一份 `CLAUDE.md`，不要讀 `lesson1_backup/`。
+學生想複習第一堂，會貼一段寫了 `tools/switch_lesson.py` 的文字：只有這個時候，照那段文字執行它寫的那一行。換檔案是那支程式的事，你不要自己複製、移動或刪除檔案。用壓縮檔拿到的資料夾沒有 `lesson1_backup/`，也沒有這支程式，不用找。

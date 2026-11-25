@@ -1,0 +1,15 @@
+{
+  "說明": "分工用的設定：工具 -> 角色 -> 模型與思考深度。空的就用你帳號預設的模型。只有 python3 tools/ask.py --role 會讀這個檔案（工具自己的 subagent 讀各自的角色檔：.claude/agents/、.codex/agents/、.agents/agents/）。",
+  "claude": {
+    "shopper": {"model": "opus", "effort": "medium"},
+    "recipe": {"model": "sonnet", "effort": "medium"},
+    "inspector": {"model": "haiku", "effort": "low"}
+  },
+  "codex": {
+    "shopper": {"model": "gpt-6.1-terra", "effort": "medium"},
+    "recipe": {"model": "gpt-6.1-terra", "effort": "medium"},
+    "inspector": {"model": "gpt-6.1-terra", "effort": "low"}
+  },
+  "agy": {"shopper": {}, "recipe": {}, "inspector": {}},
+  "copilot": {"shopper": {}, "recipe": {}, "inspector": {}}
+}

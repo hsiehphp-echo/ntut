@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>今天的午餐菜單</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #171717; background: #fff; font-family: system-ui, sans-serif; line-height: 1.7; }
+    main { width: min(100% - 2rem, 46rem); margin: 0 auto; padding: 2.5rem 0 4rem; }
+    header { border-bottom: 2px solid #171717; padding-bottom: 1.5rem; }
+    h1 { margin: 0 0 .25rem; font-size: clamp(2rem, 8vw, 3rem); line-height: 1.2; }
+    header p { margin: 0; }
+    nav { padding: 1.25rem 0; border-bottom: 1px solid #aaa; }
+    nav ul { margin: 0; padding-left: 1.4rem; }
+    a { color: inherit; }
+    article { padding: 1.75rem 0; border-bottom: 1px solid #aaa; }
+    h2 { margin: 0 0 .5rem; font-size: 1.5rem; line-height: 1.4; }
+    .meta { margin: 0 0 1rem; }
+    h3 { margin: 0 0 .35rem; font-size: 1rem; }
+    ol { margin: 0; padding-left: 1.5rem; }
+    li + li { margin-top: .35rem; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>今天的午餐</h1>
+    <p>四人份・總時間 40 分鐘</p>
+  </header>
+  <nav aria-label="今天的菜色">
+    <ul>
+      <li><a href="#rice">番茄炒蛋蓋飯（照食譜）</a></li>
+      <li><a href="#pork">古早味滷肉燥</a></li>
+      <li><a href="#greens">蒜香青江菜</a></li>
+      <li><a href="#soup">豆腐玉米濃湯</a></li>
+    </ul>
+  </nav>
+  <article id="rice">
+    <h2>番茄炒蛋蓋飯（照食譜）</h2>
+    <p class="meta">分類：飯・時間：25 分鐘・價錢：新台幣 175 元</p>
+    <h3>做法</h3>
+    <ol>
+      <li>米洗好，加水煮成白飯，約 20 分鐘。</li>
+      <li>三顆雞蛋加一小撮鹽打散；鍋中熱一大匙沙拉油，把蛋炒到剛凝固，先盛起。</li>
+      <li>兩顆番茄切塊，下鍋煮兩分鐘到軟。</li>
+      <li>把蛋倒回鍋中，加一小匙糖，拌炒三十秒。</li>
+      <li>趁熱盛在白飯上。</li>
+    </ol>
+  </article>
+  <article id="pork">
+    <h2>古早味滷肉燥</h2>
+    <p class="meta">分類：肉・時間：30 分鐘・價錢：新台幣 105 元</p>
+    <h3>做法</h3>
+    <ol>
+      <li>紅蔥頭切碎，下冷鍋小火炒到金黃有香味。</li>
+      <li>放入豬絞肉炒到變色、出油。</li>
+      <li>加醬油、米酒和一杯水，小火滷約 20 分鐘，直到收汁濃稠。</li>
+      <li>滷好放在桌中間，讓大家拌飯吃。</li>
+    </ol>
+  </article>
+  <article id="greens">
+    <h2>蒜香青江菜</h2>
+    <p class="meta">分類：菜・時間：8 分鐘・價錢：新台幣 70 元</p>
+    <h3>做法</h3>
+    <ol>
+      <li>青江菜一葉一葉洗乾淨，切成段；蒜頭拍碎。</li>
+      <li>鍋中放香油，小火爆香蒜頭。</li>
+      <li>放入青江菜大火炒約 2 分鐘到變軟，起鍋。</li>
+    </ol>
+  </article>
+  <article id="soup">
+    <h2>豆腐玉米濃湯</h2>
+    <p class="meta">分類：湯・時間：15 分鐘・價錢：新台幣 70 元</p>
+    <h3>做法</h3>
+    <ol>
+      <li>豆腐切小丁；玉米粒倒掉罐頭水。</li>
+      <li>鍋中加兩杯水和玉米粒煮滾。</li>
+      <li>放入豆腐丁和牛奶，小火煮 5 分鐘，不要大滾。</li>
+      <li>撒白胡椒粉調味，盛碗。</li>
+    </ol>
+  </article>
+</main>
+</body>
+</html>

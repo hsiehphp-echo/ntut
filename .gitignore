@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+# L2 BEGIN (tools/build_repo_l2.py)
+# 第二堂：tools/switch_lesson.py 換成第一堂時，第二堂的四個檔案存在這裡
+lesson2_keep/
+# L2 END

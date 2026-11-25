@@ -1,0 +1,21 @@
+{
+ "label": "c_r4",
+ "tool": "claude",
+ "tool_label": "Claude Code",
+ "model_label": "主對話 Sonnet 5.5，叫 agy 和 Codex",
+ "date": "2026-11-25",
+ "seconds": 263,
+ "cost_usd": 0.286,
+ "rounds": 2,
+ "max": 3,
+ "doc_version": "這一版（2026-11-25 修正後的文件）",
+ "times": [
+  "2026-11-25T03:17:17",
+  "2026-11-25T03:19:23",
+  "2026-11-25T03:20:50"
+ ],
+ "models_seen": [
+  "claude-sonnet-5-5"
+ ],
+ "how": "非互動執行（claude -p --permission-mode acceptEdits --setting-sources project,local，專案的 .claude/settings.json 以 --settings 帶入；新組出的 l2-s0 起始包，目標文件用起始包裡的預設），老師的 Mac；檔案、log.md、驗收的回答都是那一次 AI 寫的，原樣保留；只改了兩處寫法：驗收回答裡老師電腦上的暫存路徑改成專案內的相對路徑；模型名照全課的寫法補上「Google」"
+}

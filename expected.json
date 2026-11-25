@@ -1,0 +1,43 @@
+{
+  "gate_cmd": "python3 tools/check.py runs/a",
+  "state": "red",
+  "must_fail": [
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6",
+    "M7",
+    "M8"
+  ],
+  "must_pass": [],
+  "summary": "起點：要貼給 AI 的三份文件、規格、關卡與檢查程式、權限設定、重播紀錄。runs/ 是空的，check.py 紅燈（RED 0/8）：M1 到 M8 全部沒過。",
+  "rejoin": "第二堂 S0（開起來：起點）",
+  "extra_cmds": [
+    {
+      "cmd": "python3 tools/guard.py",
+      "state": "green"
+    },
+    {
+      "cmd": "python3 tools/goalcheck.py goals/goal_a.md",
+      "state": "green",
+      "expect": "GOAL: OK"
+    },
+    {
+      "cmd": "python3 tools/goalcheck.py",
+      "state": "red",
+      "expect": "GOAL: 還有"
+    },
+    {
+      "cmd": "python3 tools/replay.py a --name selftest",
+      "state": "green",
+      "expect": "REPLAY: OK"
+    },
+    {
+      "cmd": "python3 tools/guard.py audit runs/selftest",
+      "state": "green",
+      "expect": "AUDIT: OK"
+    }
+  ]
+}

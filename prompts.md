@@ -94,3 +94,43 @@ Windows 的同學：提示詞裡的 `python3` 不用自己改，有指令的每�
 ```text
 tools/check.py --before-understanding 的輸出如下（貼上）。請只修正 G0 到 G7 紅燈指出的檔案：不要改 source/，不要手改 data/ 裡腳本產生的檔案，不要改 data/corrections.json，不要改 tools/。字幕不見了就對照 data/fixed.txt 把講者的原話補回 notes/cleaned.md，並讓 notes/notes.md 的正文跟著一樣；不要為了過閘門而刪字、湊字或改寫講者的話。絕對不要建立、撰寫或修改 understanding.md，也不要試圖讓 G8 變綠，那是學生自己親手寫的。如果你認為閘門本身錯了，不要硬改，寫一段 GATE DISPUTE 說明給我。修完先跑 python3 tools/render.py，再重跑 python3 tools/check.py --before-understanding（Windows 用 py 代替 python3，沒有 py 就用 python；Windows 用命令提示字元（cmd），兩個指令分開跑）。
 ```
+
+<!-- L2 BEGIN: 第二堂（tools/build_repo_l2.py 產生；重跑只換這一段） -->
+## 第二堂：目標文件進去，一桌菜出來（2026-11-30）
+
+第二堂要貼給 AI 的，主要是三份目標文件，放在 `goals/`：`goal_a.md`（動手 A）、`goal_b.md`（動手 B）、`goal_c.md`（動手 C）。[第二堂實作頁](https://goodedunote.web.app/prepare/session2-lab.html)上有同樣的文件，可以先填幾格再複製。收尾用 `goals/my_goal.md` 寫你自己的。第二堂的規則在 `CLAUDE.md`，第一堂的原版在 `lesson1_backup/`（見 `README.md`）。
+
+**S0：看它跑關卡時會不會停下來問你**
+
+```text
+請在目前的資料夾執行這一行，指令照抄，前後不要加別的東西（不要在前面加 cd）：python3 tools/round.py runs/s0 --max 1（Windows 把 python3 換成 py）。這個程式會自己在 runs/s0 記一筆，這是正常的，請照跑。把它印出來的最後兩行原樣貼給我。除此之外不要做別的事，你自己也不要寫任何檔案。
+```
+
+### 想複習第一堂
+
+第一堂的檢查要在原位才跑得動，所以先換回來。換檔案的是 `tools/switch_lesson.py`：只複製、不刪除任何檔案。換完都要離開 AI 對話、重新開一個。
+
+**把第一堂帶回來**（第二堂的四個檔案會先存進 `lesson2_keep/`）
+
+```text
+請直接開始，不用先提計畫，做到完、不要停下來問我：我想複習第一堂，請把第一堂的檔案從 lesson1_backup/ 帶回來。
+輸入：lesson1_backup/ 裡第一堂的原檔（CLAUDE.md、README.md、spec.md、tools/check.py），和現在資料夾裡同名的第二堂版本。
+工具：只執行這一行，指令照抄，前後不要加別的東西（不要在前面加 cd）：python3 tools/switch_lesson.py 1（Windows 把 python3 換成 py，沒有 py 就用 python）。它會先把第二堂的版本存進 lesson2_keep/，再把第一堂的原檔放回原位。
+輸出：資料夾回到第一堂的樣子；第二堂的那四個檔案留在 lesson2_keep/。
+檢查：那一行跑完，會自己接著跑第一堂的檢查 tools/check.py，印出它的最後一行。第一堂還沒重做的地方是紅的，這是正常的。
+邊界：不要刪除、移動或改寫任何檔案，複製檔案交給上面那一行，你自己不要動手；不要執行 git 指令；不要打開 lesson1_backup/ 或 lesson2_keep/ 去改。
+停止：看到最後一行是 SWITCH: 開頭就停，用兩句話回報：SWITCH 那一行寫什麼、第一堂檢查的最後一行是什麼。SWITCH: 停 開頭的話，把完整輸出貼給我，不要自己修。
+```
+
+**複習完，回到第二堂**（第一堂的四個檔案，連你複習時改的地方，存回 `lesson1_backup/`）
+
+```text
+請直接開始，不用先提計畫，做到完、不要停下來問我：我複習完第一堂了，請把資料夾換回第二堂。
+輸入：lesson2_keep/ 裡第二堂的版本（CLAUDE.md、README.md、spec.md、tools/check.py），和現在資料夾裡同名的第一堂版本。
+工具：只執行這一行，指令照抄，前後不要加別的東西（不要在前面加 cd）：python3 tools/switch_lesson.py 2（Windows 把 python3 換成 py，沒有 py 就用 python）。它會先把第一堂的版本（含我複習時改的地方）存回 lesson1_backup/，再把第二堂的版本放回原位。
+輸出：資料夾回到第二堂的樣子；第一堂的那四個檔案留在 lesson1_backup/。
+檢查：那一行跑完，會自己接著跑第二堂的守衛 tools/guard.py 和起點關卡 tools/check.py runs/a，印出各自的最後一行。守衛要是 GUARD: OK。
+邊界：不要刪除、移動或改寫任何檔案，複製檔案交給上面那一行，你自己不要動手；不要執行 git 指令；不要打開 lesson1_backup/ 或 lesson2_keep/ 去改。
+停止：看到最後一行是 SWITCH: 開頭就停，用兩句話回報：SWITCH 那一行寫什麼、守衛和關卡的最後一行各是什麼。SWITCH: 停 開頭的話，把完整輸出貼給我，不要自己修。
+```
+<!-- L2 END -->
